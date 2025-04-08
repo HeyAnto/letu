@@ -10,9 +10,11 @@
   /* Primary Color */
   --color-dark: #0a0a0a;
   --color-white: #ffffff;
+  --color-grey: #a2a2a2;
 
   /* Secondary Color */
   --color-green: #00af46;
+  --color-blue: #006eff;
   --color-orange: #ffaf46;
   --color-red: #db001d;
   --color-red-brown: #2f000d;
@@ -89,4 +91,5 @@ a {
 button {
   background: none;
   border: none;
+  cursor: pointer;
 }
