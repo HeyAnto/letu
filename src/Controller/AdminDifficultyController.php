@@ -14,4 +14,16 @@ final class AdminDifficultyController extends AbstractController
     {
         return $this->render('admin/admin_difficulty/index.html.twig');
     }
+
+    #[Route('/{id}', name: 'admin_difficulty_show')]
+    public function show(): Response
+    {
+        return $this->render('admin/admin_difficulty/show.html.twig');
+    }
+
+    #[Route('/add/recipe', name: 'admin_difficulty_add')]
+    public function addRecipe(): Response
+    {
+        return $this->render('admin/admin_difficulty/add.html.twig');
+    }
 }

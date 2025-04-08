@@ -14,4 +14,16 @@ final class AdminIngredientController extends AbstractController
     {
         return $this->render('admin/admin_ingredient/index.html.twig');
     }
+
+    #[Route('/{id}', name: 'admin_ingredient_show')]
+    public function show(): Response
+    {
+        return $this->render('admin/admin_ingredient/show.html.twig');
+    }
+
+    #[Route('/add/recipe', name: 'admin_ingredient_add')]
+    public function addRecipe(): Response
+    {
+        return $this->render('admin/admin_ingredient/add.html.twig');
+    }
 }
