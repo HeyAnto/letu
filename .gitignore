@@ -1,4 +1,5 @@
 /.env.dev
+/migrations
 
 ###> symfony/framework-bundle ###
 /.env.local
