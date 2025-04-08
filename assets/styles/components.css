@@ -1,0 +1,163 @@
+/* Boutons */
+.btn {
+  display: inline-block;
+  padding: 8px 12px;
+  border: none;
+  font-family: var(--font-family);
+  font-size: var(--font-size-p);
+  font-weight: var(--font-weight-regular);
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn:hover {
+  transform: translateY(-3px);
+}
+
+/* Boutons Primaire */
+.btn-primary {
+  border: 2px solid var(--color-dark);
+  background-color: transparent;
+  color: var(--color-dark);
+}
+
+.btn-primary:hover {
+  background: var(--color-dark);
+  color: var(--color-white);
+}
+
+/* Boutons Secondaire */
+.btn-secondary {
+  border: 2px solid var(--color-blue);
+  background-color: transparent;
+  color: var(--color-blue);
+}
+
+.btn-secondary:hover {
+  background: var(--color-blue);
+  color: var(--color-white);
+}
+
+/* Boutons Lien Externe */
+.btn-link {
+  width: fit-content;
+  color: var(--color-blue);
+  cursor: pointer;
+  text-decoration: none;
+  border-bottom: transparent solid 1px;
+}
+
+.btn-link:hover {
+  border-bottom: var(--color-blue) solid 1px;
+}
+
+.btn-link img {
+  height: 10px;
+}
+
+/* Boutons Danger */
+.btn-danger {
+  border: 2px solid var(--color-status-danger-strong);
+  background-color: var(--color-status-danger-strong);
+  color: var(--color-status-danger);
+}
+
+/* Boutons Succès */
+.btn-success {
+  border: 2px solid var(--color-status-success-strong);
+  background-color: var(--color-status-success-strong);
+  color: var(--color-status-success);
+}
+
+/* Mark */
+mark {
+  padding: 2px 5px;
+  border-radius: 3px;
+  background-color: var(--color-grey-light);
+}
+
+/* Formulaire */
+.form-label {
+  display: block;
+  font-size: var(--font-size-p);
+  font-weight: var(--font-weight-regular);
+}
+
+.form-input {
+  padding: 10px 15px;
+  border: 1px solid var(--color-grey-dark);
+  outline: none;
+  font-size: var(--font-size-p);
+  font-weight: var(--font-weight-regular);
+}
+
+.form-input:hover {
+  border-color: var(--blue-dark);
+}
+
+.form-input:focus {
+  border-color: var(--blue-dark);
+}
+
+/* Select */
+.form-select {
+  box-sizing: border-box;
+  padding: 5px;
+  border: 1px solid var(--color-grey-dark);
+  background-color: transparent;
+  font-size: var(--font-size-p);
+  font-weight: var(--font-weight-regular);
+  outline: none;
+  transition: all 0.3s ease;
+}
+
+.form-select:hover {
+  border-color: var(--color-dark);
+}
+
+.form-select:focus {
+  border-color: var(--color-dark);
+}
+
+/* Checkbox */
+.form-checkbox {
+  display: flex;
+  align-items: center;
+  border: none;
+}
+
+.form-checkbox input[type="checkbox"] {
+  margin-right: 5px;
+  accent-color: var(--color-blue);
+}
+
+/* Tableau */
+.tableau {
+  font-size: var(--font-size-p);
+  font-weight: var(--font-weight-regular);
+  text-align: left;
+  border-collapse: collapse;
+}
+
+.tableau th,
+.tableau td {
+  padding: 8px;
+  text-align: left;
+  border: 1px solid var(--color-dark);
+}
+
+.tableau th {
+  background-color: var(--color-grey-light);
+  font-size: var(--font-size-p);
+  font-weight: var(--font-weight-bold);
+}
+
+.tableau tbody tr:nth-child(odd) {
+  background-color: var(--color-white);
+}
+
+.tableau tbody tr:nth-child(even) {
+  background-color: var(--color-grey-light);
+}
