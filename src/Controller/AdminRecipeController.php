@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Recipe;
 use App\Form\RecipeFormType;
+use App\Repository\RecipeRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -14,19 +15,19 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 final class AdminRecipeController extends AbstractController
 {
     #[Route('', name: 'admin_recipe_index')]
-    public function index(): Response
+    public function index(RecipeRepository $recipeRepository): Response
     {
+        $recipes = $recipeRepository->findAll();
+
         return $this->render('admin/admin_recipe/index.html.twig', [
-            'controller_name' => 'AdminRecipeController',
+            'recipes' => $recipes,
         ]);
     }
 
     #[Route('/{id}', name: 'admin_recipe_show')]
     public function show(): Response
     {
-        return $this->render('admin/admin_recipe/show.html.twig', [
-            'controller_name' => 'AdminRecipeController',
-        ]);
+        return $this->render('admin/admin_recipe/show.html.twig');
     }
 
     #[Route('/add/recipe', name: 'admin_recipe_add')]

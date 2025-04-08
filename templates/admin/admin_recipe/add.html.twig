@@ -1,11 +1,11 @@
 {% extends 'admin/admin-base.html.twig' %}
 
 {% block main %}
-<section class="flex flex-column pt-15">
-    <a class="btn" href="{{ path('admin_recipe_index') }}">Retour</a>
+<section class="flex flex-column pt-15 gap-15">
+    <a class="btn" href="{{ path('admin_recipe_index') }}">Retour à la liste</a>
 </section>
 
-<section class="section-content flex flex-column pt-15 gap-15">
+<section class="flex flex-column pt-15 gap-15">
     <h1>Ajouter une recette</h1>
 
     {{ form_start(form) }}
