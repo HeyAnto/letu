@@ -9,6 +9,8 @@
   font-size: var(--font-size-p);
   font-weight: var(--font-weight-regular);
   line-height: var(--line-height-p);
+
+  transition: all 0.3s;
 }
 
 html {
@@ -16,17 +18,60 @@ html {
 }
 
 body {
-  display: flex;
-  flex-direction: column;
+  overflow: hidden;
+  width: 100%;
+  max-width: 1920px;
   min-height: 100vh;
-  padding: 50px;
+
+  margin: auto;
+
+  background-color: var(--color-white);
+  color: var(--color-dark);
+  border-left: solid 1px var(--color-green);
+  border-right: solid 1px var(--color-green);
+}
+
+.sidebar {
+  width: 100%;
+  max-width: 300px;
+
+  border-right: solid 1px var(--color-green);
+}
+
+.sidebar .logo {
+  height: 24px;
+}
+
+.btn-nav {
+  display: flex;
+  width: 100%;
+  padding: 8px 12px;
+  gap: 10px;
 
   color: var(--color-dark);
-  background-color: var(--color-white);
+  border: solid 1px var(--color-green);
+  border-radius: 6px;
+}
+
+.btn-nav:hover {
+  background-color: var(--color-opa-green);
+}
+
+.btn-nav.active {
+  background-color: var(--color-green);
+  color: var(--color-white);
 }
 
 main {
   flex: 1;
+}
+
+section {
+  width: 100%;
+}
+
+.section-content {
+  max-width: 500px;
 }
 
 /* Media Queries */
@@ -37,7 +82,4 @@ main {
 }
 
 @media screen and (max-width: 425px) {
-  body {
-    padding: 10px;
-  }
 }

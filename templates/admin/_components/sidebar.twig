@@ -1,0 +1,38 @@
+<div class="sidebar flex flex-column p-15 gap-15">
+  <div>
+    <img class="logo" src="{{ asset('logo.svg') }}" alt="Letu Logo">
+    <p>Admin</p>
+  </div>
+
+  <nav class="flex flex-column gap-7">
+    <a class="btn-nav {{ app.request.attributes.get('_route') == 'admin_index' ? 'active' : '' }}"
+      href="{{ path('admin_index') }}">
+      Accueil
+    </a>
+
+    <a class="btn-nav {{ app.request.attributes.get('_route') starts with 'admin_recipe' ? 'active' : '' }}"
+      href="{{ path('admin_recipe_index') }}">
+      Recettes
+    </a>
+
+    <a class="btn-nav {{ app.request.attributes.get('_route') starts with 'admin_category' ? 'active' : '' }}"
+      href="{{ path('admin_category_index') }}">
+      Catégories
+    </a>
+
+    <a class="btn-nav {{ app.request.attributes.get('_route') starts with 'admin_ingredient' ? 'active' : '' }}"
+      href="{{ path('admin_ingredient_index') }}">
+      Ingrédients
+    </a>
+
+    <a class="btn-nav {{ app.request.attributes.get('_route') starts with 'admin_difficulty' ? 'active' : '' }}"
+      href="{{ path('admin_difficulty_index') }}">
+      Difficulté
+    </a>
+
+    <a class="btn-nav {{ app.request.attributes.get('_route') starts with 'admin_user' ? 'active' : '' }}"
+      href="{{ path('admin_user_index') }}">
+      Utilisateurs
+    </a>
+  </nav>
+</div>

@@ -18,7 +18,7 @@
   --color-red-brown: #2f000d;
 
   /* Tertiary Color */
-  --color-opa-green: #80d7a3;
+  --color-opa-green: #ccefda;
 
   /* Font Family */
   --font-family: "BDO Grotesk", "Arial", sans-serif;
@@ -38,6 +38,9 @@
   --line-height-p: 20px;
   --line-height-h1: 30px;
   --line-height-h1: 24px;
+
+  /* Spacing Scale (Base: 2px / 0.125rem) */
+  --spacing-unit: 0.125rem;
 }
 
 ::selection {

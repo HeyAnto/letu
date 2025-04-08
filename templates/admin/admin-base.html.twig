@@ -1,17 +1,26 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <title>{% block title %}Letu - Admin{% endblock %}</title>
-        <link rel="icon" href="{{ asset('favicon.png') }}" type="image/x-icon">
-        {% block stylesheets %}
-        {% endblock %}
 
-        {% block javascripts %}
-            {% block importmap %}{{ importmap('app-admin') }}{% endblock %}
-        {% endblock %}
-    </head>
-    <body>
-        {% block body %}{% endblock %}
-    </body>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>{% block title %}Letu Admin{% endblock %}</title>
+    <link rel="icon" href="{{ asset('favicon.ico') }}" type="image/x-icon" />
+    {% block stylesheets %}
+    {% endblock %}
+
+    {% block javascripts %}
+    {% block importmap %}{{ importmap('app-admin') }}{% endblock %}
+    {% endblock %}
+</head>
+
+<body class="flex">
+    {% include "admin/_components/sidebar.twig" %}
+    <main class="flex flex-column p-15">
+        {% include "admin/_components/header.twig" %}
+        {% block main %}{% endblock %}
+    </main>
+</body>
+
 </html>
