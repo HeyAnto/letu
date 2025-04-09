@@ -212,18 +212,13 @@ select:invalid {
   background-color: var(--color-light-grey);
 }
 
-.icon-action {
-  padding: 3px;
-}
-
 .icon-action img {
-  height: 20px;
+  width: 30px;
+  height: 30px;
 }
 
 .icon-action:hover img {
-  opacity: 0.9;
-  transform: scale(1.1);
-  transition: transform 0.2s ease-in-out;
+  opacity: 0.8;
 }
 
 /* Media Queries */
