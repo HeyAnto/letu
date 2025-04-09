@@ -37,10 +37,23 @@ final class AdminRecipeController extends AbstractController
         $recipe->setAuthor($this->getUser());
 
         $form = $this->createForm(RecipeFormType::class, $recipe);
-
         $form->handleRequest($request);
 
+        if (!$recipe->getImage()) {
+            $recipe->setImage('/images/default-recipe.jpg');
+        }
+
         if ($form->isSubmitted() && $form->isValid()) {
+            foreach ($recipe->getQuantity() as $quantity) {
+                $quantity->setRecipe($recipe);
+                $entityManager->persist($quantity);
+            }
+
+            foreach ($recipe->getStep() as $step) {
+                $step->setRecipe($recipe);
+                $entityManager->persist($step);
+            }
+
             $entityManager->persist($recipe);
             $entityManager->flush();
 
