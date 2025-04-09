@@ -64,11 +64,13 @@ class RecipeFormType extends AbstractType
                 'class' => Category::class,
                 'choice_label' => 'label',
                 'label' => false,
+                'required' => true,
                 'placeholder' => 'Catégorie',
             ])
             ->add('difficulty', EntityType::class, [
                 'class' => Difficulty::class,
                 'choice_label' => 'label',
+                'required' => true,
                 'label' => false,
                 'placeholder' => 'Difficulté',
             ])

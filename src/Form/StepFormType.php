@@ -36,6 +36,7 @@ class StepFormType extends AbstractType
             ->add('ingredient', EntityType::class, [
                 'class' => Ingredient::class,
                 'choice_label' => 'label',
+                'required' => false,
                 'multiple' => true,
                 'expanded' => false,
                 'label' => 'Ingrédients',
