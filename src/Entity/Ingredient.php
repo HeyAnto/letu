@@ -27,9 +27,16 @@ class Ingredient
     #[ORM\ManyToMany(targetEntity: Step::class, mappedBy: 'ingredient')]
     private Collection $steps;
 
+    /**
+     * @var Collection<int, Quantity>
+     */
+    #[ORM\OneToMany(targetEntity: Quantity::class, mappedBy: 'ingredient')]
+    private Collection $quantity;
+
     public function __construct()
     {
         $this->steps = new ArrayCollection();
+        $this->quantity = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -83,6 +90,36 @@ class Ingredient
     {
         if ($this->steps->removeElement($step)) {
             $step->removeIngredient($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Quantity>
+     */
+    public function getQuantity(): Collection
+    {
+        return $this->quantity;
+    }
+
+    public function addQuantity(Quantity $quantity): static
+    {
+        if (!$this->quantity->contains($quantity)) {
+            $this->quantity->add($quantity);
+            $quantity->setIngredient($this);
+        }
+
+        return $this;
+    }
+
+    public function removeQuantity(Quantity $quantity): static
+    {
+        if ($this->quantity->removeElement($quantity)) {
+            // set the owning side to null (unless already changed)
+            if ($quantity->getIngredient() === $this) {
+                $quantity->setIngredient(null);
+            }
         }
 
         return $this;

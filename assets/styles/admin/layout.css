@@ -50,11 +50,13 @@ body {
   gap: 10px;
 
   color: var(--color-dark);
-  border: solid 1px var(--color-green);
+  border: solid 1px var(--color-white);
   border-radius: 6px;
+  transition: none;
 }
 
 .btn-nav:hover {
+  border: solid 1px var(--color-green);
   background-color: var(--color-opa-green);
 }
 

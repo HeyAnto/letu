@@ -7,7 +7,7 @@
   <nav class="flex flex-column gap-7">
     <a class="btn-nav {{ app.request.attributes.get('_route') == 'admin_index' ? 'active' : '' }}"
       href="{{ path('admin_index') }}">
-      Accueil
+      Tableau de bord
     </a>
 
     <a class="btn-nav {{ app.request.attributes.get('_route') starts with 'admin_recipe' ? 'active' : '' }}"
@@ -27,12 +27,17 @@
 
     <a class="btn-nav {{ app.request.attributes.get('_route') starts with 'admin_difficulty' ? 'active' : '' }}"
       href="{{ path('admin_difficulty_index') }}">
-      Difficulté
+      Difficultés
     </a>
 
     <a class="btn-nav {{ app.request.attributes.get('_route') starts with 'admin_user' ? 'active' : '' }}"
       href="{{ path('admin_user_index') }}">
       Utilisateurs
+    </a>
+
+    <a class="btn-nav {{ app.request.attributes.get('_route') starts with 'profile' ? 'active' : '' }}"
+      href="{{ path('admin_user_index') }}">
+      Profil
     </a>
   </nav>
 </div>

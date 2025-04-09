@@ -22,7 +22,7 @@ class Quantity
     #[ORM\ManyToOne(inversedBy: 'quantity')]
     private ?Recipe $recipe = null;
 
-    #[ORM\OneToOne(cascade: ['persist', 'remove'])]
+    #[ORM\ManyToOne(inversedBy: 'quantity')]
     private ?Ingredient $ingredient = null;
 
     public function getId(): ?int

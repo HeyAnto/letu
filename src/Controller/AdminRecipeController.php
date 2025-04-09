@@ -39,11 +39,15 @@ final class AdminRecipeController extends AbstractController
         $form = $this->createForm(RecipeFormType::class, $recipe);
         $form->handleRequest($request);
 
-        if (!$recipe->getImage()) {
-            $recipe->setImage('/images/default-recipe.jpg');
-        }
-
         if ($form->isSubmitted() && $form->isValid()) {
+            if (!$recipe->getImage()) {
+                $recipe->setImage('/images/default-recipe.jpg');
+            }
+
+            $now = new \DateTimeImmutable();
+            $recipe->setCreatedAt($now);
+            $recipe->setUpdatedAt($now);
+
             foreach ($recipe->getQuantity() as $quantity) {
                 $quantity->setRecipe($recipe);
                 $entityManager->persist($quantity);
