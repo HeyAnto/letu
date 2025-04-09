@@ -16,15 +16,11 @@
   /* Secondary Color */
   --color-green: #00af46;
   --color-blue: #006eff;
-  --color-orange: #ffaf46;
+  --color-yellow: #ffaf46;
   --color-red: #db001d;
-  --color-red-brown: #2f000d;
-
-  /* Tertiary Color */
-  --color-opa-green: #ccefda;
 
   /* Font Family */
-  --font-family: "BDO Grotesk", "Arial", sans-serif;
+  --font-family: "BDO Grotesk", Arial, Helvetica, sans-serif;
 
   /* Font Size */
   --font-size-p-min: 0.75rem;

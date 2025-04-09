@@ -24,13 +24,13 @@ class Ingredient
     /**
      * @var Collection<int, Step>
      */
-    #[ORM\ManyToMany(targetEntity: Step::class, mappedBy: 'ingredient')]
+    #[ORM\ManyToMany(targetEntity: Step::class, mappedBy: 'ingredient', orphanRemoval: true)]
     private Collection $steps;
 
     /**
      * @var Collection<int, Quantity>
      */
-    #[ORM\OneToMany(targetEntity: Quantity::class, mappedBy: 'ingredient')]
+    #[ORM\OneToMany(targetEntity: Quantity::class, mappedBy: 'ingredient', orphanRemoval: true)]
     private Collection $quantity;
 
     public function __construct()

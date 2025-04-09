@@ -183,6 +183,13 @@ select:invalid {
   color: var(--color-white);
 }
 
+/* Form Ingredient */
+#ingredient_form {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
 /* Table */
 .table {
   font-size: var(--font-size-p);
@@ -212,6 +219,7 @@ select:invalid {
   background-color: var(--color-light-grey);
 }
 
+/* Talbe Icon */
 .icon-action img {
   width: 30px;
   height: 30px;
@@ -219,6 +227,16 @@ select:invalid {
 
 .icon-action:hover img {
   opacity: 0.8;
+}
+
+/* Table Image */
+.table-img {
+  width: 0;
+  background-color: var(--color-white);
+}
+
+.table-img-ingredient {
+  height: 100px;
 }
 
 /* Media Queries */
