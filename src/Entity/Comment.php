@@ -22,6 +22,7 @@ class Comment
     private ?\DateTimeInterface $created_at = null;
 
     #[ORM\ManyToOne(inversedBy: 'comment')]
+    #[ORM\JoinColumn(nullable: false)]
     private ?Recipe $recipe = null;
 
     public function getId(): ?int

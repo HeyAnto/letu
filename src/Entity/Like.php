@@ -23,6 +23,7 @@ class Like
     private ?User $user = null;
 
     #[ORM\ManyToOne(inversedBy: 'likes')]
+    #[ORM\JoinColumn(nullable: false)]
     private ?Recipe $recipe = null;
 
     public function getId(): ?int

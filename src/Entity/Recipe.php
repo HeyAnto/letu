@@ -2,9 +2,6 @@
 
 namespace App\Entity;
 
-use App\Entity\Like;
-use App\Entity\Comment;
-use App\Entity\Quantity;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\RecipeRepository;
@@ -50,35 +47,35 @@ class Recipe
     private ?Difficulty $difficulty = null;
 
     /**
-     * @var Collection<int, Comment>
-     */
-    #[ORM\OneToMany(targetEntity: Comment::class, mappedBy: 'recipe')]
-    private Collection $comment;
-
-    /**
-     * @var Collection<int, Like>
-     */
-    #[ORM\OneToMany(targetEntity: Like::class, mappedBy: 'recipe')]
-    private Collection $likes;
-
-    /**
-     * @var Collection<int, Quantity>
-     */
-    #[ORM\OneToMany(targetEntity: Quantity::class, mappedBy: 'recipe')]
-    private Collection $quantity;
-
-    /**
      * @var Collection<int, Step>
      */
     #[ORM\OneToMany(targetEntity: Step::class, mappedBy: 'recipe', orphanRemoval: true)]
     private Collection $step;
 
+    /**
+     * @var Collection<int, Comment>
+     */
+    #[ORM\OneToMany(targetEntity: Comment::class, mappedBy: 'recipe', orphanRemoval: true)]
+    private Collection $comment;
+
+    /**
+     * @var Collection<int, Like>
+     */
+    #[ORM\OneToMany(targetEntity: Like::class, mappedBy: 'recipe', orphanRemoval: true)]
+    private Collection $likes;
+
+    /**
+     * @var Collection<int, Quantity>
+     */
+    #[ORM\OneToMany(targetEntity: Quantity::class, mappedBy: 'recipe', orphanRemoval: true)]
+    private Collection $quantity;
+
     public function __construct()
     {
+        $this->step = new ArrayCollection();
         $this->comment = new ArrayCollection();
         $this->likes = new ArrayCollection();
         $this->quantity = new ArrayCollection();
-        $this->step = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -207,6 +204,36 @@ class Recipe
     }
 
     /**
+     * @return Collection<int, Step>
+     */
+    public function getStep(): Collection
+    {
+        return $this->step;
+    }
+
+    public function addStep(Step $step): static
+    {
+        if (!$this->step->contains($step)) {
+            $this->step->add($step);
+            $step->setRecipe($this);
+        }
+
+        return $this;
+    }
+
+    public function removeStep(Step $step): static
+    {
+        if ($this->step->removeElement($step)) {
+            // set the owning side to null (unless already changed)
+            if ($step->getRecipe() === $this) {
+                $step->setRecipe(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
      * @return Collection<int, Comment>
      */
     public function getComment(): Collection
@@ -290,36 +317,6 @@ class Recipe
             // set the owning side to null (unless already changed)
             if ($quantity->getRecipe() === $this) {
                 $quantity->setRecipe(null);
-            }
-        }
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, Step>
-     */
-    public function getStep(): Collection
-    {
-        return $this->step;
-    }
-
-    public function addStep(Step $step): static
-    {
-        if (!$this->step->contains($step)) {
-            $this->step->add($step);
-            $step->setRecipe($this);
-        }
-
-        return $this;
-    }
-
-    public function removeStep(Step $step): static
-    {
-        if ($this->step->removeElement($step)) {
-            // set the owning side to null (unless already changed)
-            if ($step->getRecipe() === $this) {
-                $step->setRecipe(null);
             }
         }
 
