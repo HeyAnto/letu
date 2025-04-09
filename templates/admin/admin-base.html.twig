@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <title>{% block title %}Letu Admin{% endblock %}</title>
     <link rel="icon" href="{{ asset('favicon.ico') }}" type="image/x-icon" />
@@ -12,8 +12,6 @@
 
     {% block javascripts %}
     {% block importmap %}{{ importmap('app-admin') }}{% endblock %}
-    <script src="{{ asset('js/admin/recipe-form.js') }}"></script>
-    <script src="{{ asset('js/delete-modal.js') }}"></script>
     {% endblock %}
 </head>
 
@@ -23,6 +21,7 @@
         {% include "admin/_components/header.twig" %}
         {% block main %}{% endblock %}
     </main>
+    {% block scripts %}{% endblock %}
 </body>
 
 </html>
