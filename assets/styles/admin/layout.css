@@ -57,7 +57,7 @@ body {
 
 .btn-nav:hover {
   border: solid 1px var(--color-green);
-  background-color: var(--color-opa-green);
+  background-color: var(--color-light-green);
 }
 
 .btn-nav.active {
