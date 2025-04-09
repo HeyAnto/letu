@@ -20,11 +20,10 @@ class Like
 
     #[ORM\ManyToOne(inversedBy: 'likes')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?Recipe $recipe = null;
+    private ?User $user = null;
 
     #[ORM\ManyToOne(inversedBy: 'likes')]
-    #[ORM\JoinColumn(nullable: false)]
-    private ?User $user = null;
+    private ?Recipe $recipe = null;
 
     public function getId(): ?int
     {
@@ -43,18 +42,6 @@ class Like
         return $this;
     }
 
-    public function getRecipe(): ?Recipe
-    {
-        return $this->recipe;
-    }
-
-    public function setRecipe(?Recipe $recipe): static
-    {
-        $this->recipe = $recipe;
-
-        return $this;
-    }
-
     public function getUser(): ?User
     {
         return $this->user;
@@ -63,6 +50,18 @@ class Like
     public function setUser(?User $user): static
     {
         $this->user = $user;
+
+        return $this;
+    }
+
+    public function getRecipe(): ?Recipe
+    {
+        return $this->recipe;
+    }
+
+    public function setRecipe(?Recipe $recipe): static
+    {
+        $this->recipe = $recipe;
 
         return $this;
     }

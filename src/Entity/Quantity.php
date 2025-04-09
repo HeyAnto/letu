@@ -20,10 +20,10 @@ class Quantity
     private ?string $unit = null;
 
     #[ORM\ManyToOne(inversedBy: 'quantity')]
-    private ?Recipe $recipe = null;
+    private ?Ingredient $ingredient = null;
 
     #[ORM\ManyToOne(inversedBy: 'quantity')]
-    private ?Ingredient $ingredient = null;
+    private ?Recipe $recipe = null;
 
     public function getId(): ?int
     {
@@ -54,18 +54,6 @@ class Quantity
         return $this;
     }
 
-    public function getRecipe(): ?Recipe
-    {
-        return $this->recipe;
-    }
-
-    public function setRecipe(?Recipe $recipe): static
-    {
-        $this->recipe = $recipe;
-
-        return $this;
-    }
-
     public function getIngredient(): ?Ingredient
     {
         return $this->ingredient;
@@ -74,6 +62,18 @@ class Quantity
     public function setIngredient(?Ingredient $ingredient): static
     {
         $this->ingredient = $ingredient;
+
+        return $this;
+    }
+
+    public function getRecipe(): ?Recipe
+    {
+        return $this->recipe;
+    }
+
+    public function setRecipe(?Recipe $recipe): static
+    {
+        $this->recipe = $recipe;
 
         return $this;
     }

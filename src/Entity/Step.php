@@ -22,15 +22,15 @@ class Step
     #[ORM\Column(length: 255)]
     private ?string $description = null;
 
-    #[ORM\ManyToOne(inversedBy: 'step')]
-    #[ORM\JoinColumn(nullable: false)]
-    private ?Recipe $recipe = null;
-
     /**
      * @var Collection<int, Ingredient>
      */
     #[ORM\ManyToMany(targetEntity: Ingredient::class, inversedBy: 'steps')]
     private Collection $ingredient;
+
+    #[ORM\ManyToOne(inversedBy: 'step')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Recipe $recipe = null;
 
     public function __construct()
     {
@@ -66,18 +66,6 @@ class Step
         return $this;
     }
 
-    public function getRecipe(): ?Recipe
-    {
-        return $this->recipe;
-    }
-
-    public function setRecipe(?Recipe $recipe): static
-    {
-        $this->recipe = $recipe;
-
-        return $this;
-    }
-
     /**
      * @return Collection<int, Ingredient>
      */
@@ -98,6 +86,18 @@ class Step
     public function removeIngredient(Ingredient $ingredient): static
     {
         $this->ingredient->removeElement($ingredient);
+
+        return $this;
+    }
+
+    public function getRecipe(): ?Recipe
+    {
+        return $this->recipe;
+    }
+
+    public function setRecipe(?Recipe $recipe): static
+    {
+        $this->recipe = $recipe;
 
         return $this;
     }
