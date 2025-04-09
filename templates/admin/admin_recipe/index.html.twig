@@ -1,11 +1,11 @@
 {% extends 'admin/admin-base.html.twig' %}
 
 {% block main %}
-<section class="flex flex-column pt-15 gap-15">
+<section class="flex flex-column pt-15">
   <a class="btn btn-green" href="{{ path('admin_recipe_add') }}">Ajouter une recette</a>
 </section>
 
-<section class="flex flex-column pt-15">
+<section class="flex flex-column pt-15 gap-15">
   <h1>Liste des Recettes</h1>
 
   <table class="table">
@@ -28,8 +28,4 @@
     </tbody>
   </table>
 </section>
-{% endblock %}
-
-{% block scripts %}
-<script src="{{ asset('js/delete-modal.js') }}"></script>
 {% endblock %}

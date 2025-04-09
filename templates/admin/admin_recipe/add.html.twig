@@ -1,7 +1,7 @@
 {% extends 'admin/admin-base.html.twig' %}
 
 {% block main %}
-<section class="flex flex-column pt-15 gap-15">
+<section class="flex flex-column pt-15">
     <a class="btn" href="{{ path('admin_recipe_index') }}">Retour à la liste</a>
 </section>
 
@@ -61,8 +61,4 @@
     <button type="submit" class="btn btn-full btn-green mt-8">Ajouter</button>
     {{ form_end(form) }}
 </section>
-{% endblock %}
-
-{% block scripts %}
-<script src="{{ asset('js/admin/recipe-form.js') }}"></script>
 {% endblock %}
