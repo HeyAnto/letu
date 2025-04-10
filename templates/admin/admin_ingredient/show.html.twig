@@ -1,8 +1,12 @@
 {% extends 'admin/admin-base.html.twig' %}
 
 {% block main %}
-<section class="flex pt-15 gap-15">
-  <a class="btn btn-green" href="{{ path('admin_ingredient_add') }}">Ajouter un ingrédient</a>
+<section class="flex pt-15 gap-7">
+  <a class="btn" href="{{ path('admin_ingredient_index') }}">Retour à la liste</a>
+  <a class="btn" href="{{ path('admin_ingredient_edit', { id: ingredient.id }) }}">Modifier l'ingredient</a>
+  <a class="btn btn-red delete-action" data-url="{{ path('admin_ingredient_delete', { id: ingredient.id }) }}">
+    Supprimer l'ingredient
+  </a>
 </section>
 
 <section class="flex flex-column pt-15 gap-15">
@@ -12,17 +16,17 @@
     <tbody>
       <tr>
         <th>ID</th>
-        <td>{{ product.id }}</td>
+        <td>{{ ingredient.id }}</td>
       </tr>
 
       <tr>
-        <th>Titre</th>
-        <td>{{ product.title }}</td>
+        <th>Label</th>
+        <td>{{ ingredient.label }}</td>
       </tr>
 
       <tr>
-        <th>Description</th>
-        <td>{{ product.description }}</td>
+        <th>Image</th>
+        <td><img class="table-img-ingredient" src="{{ asset(ingredient.image) }}" alt="{{ ingredient.label }}"></td>
       </tr>
     </tbody>
   </table>
