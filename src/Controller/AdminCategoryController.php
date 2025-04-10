@@ -49,6 +49,30 @@ final class AdminCategoryController extends AbstractController
         return $this->render('admin/admin_category/show.html.twig');
     }
 
+    #[Route('/edit/category/{id}', name: 'admin_category_edit')]
+    public function edit(int $id, CategoryRepository $categoryRepository, EntityManagerInterface $entityManager, Request $request): Response
+    {
+        $category = $categoryRepository->find($id);
+
+        if (!$category) {
+            return new Response("Catégorie non trouvée", 404);
+        }
+
+        $form = $this->createForm(categoryFormType::class, $category);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager->persist($category);
+            $entityManager->flush();
+            return $this->redirectToRoute('admin_category_index');
+        }
+
+        return $this->render('admin/admin_category/edit.html.twig', [
+            'category' => $category,
+            'form' => $form->createView(),
+        ]);
+    }
+
     #[Route('/delete/category/{id}', name: 'admin_category_delete')]
     public function delete(CategoryRepository $categoryRepository, EntityManagerInterface $entityManager, int $id): Response
     {
