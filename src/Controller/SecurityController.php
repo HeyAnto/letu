@@ -23,6 +23,10 @@ class SecurityController extends AbstractController
         $form = $this->createForm(RegistrationFormType::class, $user);
         $form->handleRequest($request);
 
+        $now = new \DateTimeImmutable();
+        $user->setCreatedAt($now);
+        $user->setUpdatedAt($now);
+
         if ($form->isSubmitted() && $form->isValid()) {
             /** @var string $plainPassword */
             $plainPassword = $form->get('plainPassword')->getData();
