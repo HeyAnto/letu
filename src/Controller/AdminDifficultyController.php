@@ -46,9 +46,13 @@ final class AdminDifficultyController extends AbstractController
     }
 
     #[Route('/{id}', name: 'admin_difficulty_show')]
-    public function show(): Response
+    public function show(DifficultyRepository $difficultyRepository, int $id): Response
     {
-        return $this->render('admin/admin_difficulty/show.html.twig');
+        $difficulty = $difficultyRepository->find($id);
+
+        return $this->render('admin/admin_difficulty/show.html.twig', [
+            'difficulty' => $difficulty,
+        ]);
     }
 
     #[Route('/edit/difficulty/{id}', name: 'admin_difficulty_edit')]
