@@ -61,6 +61,7 @@ body {
 }
 
 .btn-nav.active {
+  border: solid 1px var(--color-green);
   background-color: var(--color-green);
   color: var(--color-white);
 }
