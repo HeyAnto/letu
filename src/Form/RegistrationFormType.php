@@ -6,6 +6,7 @@ use Dom\Text;
 use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Validator\Constraints\Email;
 use Symfony\Component\Validator\Constraints\IsTrue;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
@@ -21,32 +22,63 @@ class RegistrationFormType extends AbstractType
     {
         $builder
             ->add('username', TextType::class, [
+                'label' => 'Nom d\'utilisateur',
                 'required' => true,
+                'constraints' => [
+                    new NotBlank([
+                        'message' => 'Entrer un nom d\'utilisateur',
+                    ]),
+                    new Length([
+                        'min' => 3,
+                        'minMessage' => 'Votre nom d\'utilisateur doit contenir au moins {{ limit }} caractères',
+                        'max' => 20,
+                        'maxMessage' => 'Votre nom d\'utilisateur ne doit pas dépasser {{ limit }} caractères',
+                    ]),
+                ],
+                'attr' => [
+                    'autocomplete' => false,
+                    'placeholder' => 'Nom d\'utilisateur',
+                ],
             ])
             ->add('email', EmailType::class, [
-                'attr' => ['autocomplete' => 'email'],
+                'label' => 'Email',
                 'required' => true,
+                'constraints' => [
+                    new NotBlank([
+                        'message' => 'Entrer une adresse email',
+                    ]),
+                    new Email([
+                        'message' => 'Entrer une adresse email valide',
+                    ]),
+                    new Length([
+                        'max' => 180,
+                        'maxMessage' => 'Votre adresse email ne doit pas dépasser {{ limit }} caractères',
+                    ]),
+                ],
+                'attr' => [
+                    'autocomplete' => 'email',
+                    'placeholder' => 'example@email.com',
+                ],
             ])
             ->add('agreeTerms', CheckboxType::class, [
+                'label' => 'Accepter les conditions d\'utilisation',
                 'mapped' => false,
                 'constraints' => [
                     new IsTrue([
-                        'message' => 'You should agree to our terms.',
+                        'message' => 'Vous devez accepter nos conditions d\'utilisation.',
                     ]),
                 ],
             ])
             ->add('plainPassword', PasswordType::class, [
-                // instead of being set onto the object directly,
-                // this is read and encoded in the controller
                 'mapped' => false,
                 'attr' => ['autocomplete' => 'new-password'],
                 'constraints' => [
                     new NotBlank([
-                        'message' => 'Please enter a password',
+                        'message' => 'Entrer un mot de passe',
                     ]),
                     new Length([
                         'min' => 6,
-                        'minMessage' => 'Your password should be at least {{ limit }} characters',
+                        'minMessage' => 'Votre mot de passe doit contenir au moins {{ limit }} caractères',
                         // max length allowed by Symfony for security reasons
                         'max' => 4096,
                     ]),

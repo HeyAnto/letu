@@ -1,11 +1,11 @@
 <header class="flex flex-wrap justify-between items-center gap-7">
   <div class="flex items-center gap-4">
-    <img class="min-profile-picture" src="{{ asset('images/profile-picture/pp-admin-default.svg') }}"
-      alt="{{ app.user.email }} Profile Picture">
-    <p>{{ app.user.email }}</p>
+    <img class="min-profile-picture" src="{{ asset(app.user.profilePicture) }}"
+      alt="{{ app.user.username}}'s profile picture">
+    <p>{{ app.user.username }}</p>
   </div>
   <div class="flex items-center gap-7">
     <a class="btn" href="{{ path('index') }}">Retour à Letu</a>
-    <a class="btn btn-red" href="{{ path('app_logout') }}">Déconnexion</a>
+    <a class="btn btn-red" href="{{ path('connexion_logout') }}">Déconnexion</a>
   </div>
 </header>

@@ -9,6 +9,8 @@
   font-size: var(--font-size-p);
   font-weight: var(--font-weight-regular);
   line-height: var(--line-height-p);
+
+  transition: all 0.3s;
 }
 
 html {
@@ -16,14 +18,82 @@ html {
 }
 
 body {
-  display: flex;
-  flex-direction: column;
+  overflow: hidden;
+  width: 100%;
+  max-width: 1920px;
   min-height: 100vh;
-  padding: 50px;
+
+  margin: auto;
 
   background-color: var(--color-white);
+  color: var(--color-dark);
+  border-left: solid 1px var(--color-dark);
+  border-right: solid 1px var(--color-dark);
 }
 
+/* Header */
+header div {
+  width: 100%;
+}
+
+.logo.active {
+  pointer-events: none;
+}
+
+.btn-nav {
+  display: flex;
+  padding: 8px 12px;
+  gap: 10px;
+
+  color: var(--color-dark);
+  border: solid 1px var(--color-white);
+  border-radius: 6px;
+  transition: none;
+}
+
+.btn-nav:hover {
+  border: solid 1px var(--color-green);
+  background-color: var(--color-light-green);
+}
+
+.btn-nav.active {
+  color: var(--color-white);
+  background-color: var(--color-green);
+  border: solid 1px var(--color-green);
+  pointer-events: none;
+}
+
+/* Profile */
+.profile {
+  display: flex;
+  align-items: center;
+  width: min-content;
+  gap: 6px;
+  padding: 6px;
+
+  border-radius: 6px;
+  border: solid 1px var(--color-white);
+
+  transition: none;
+}
+
+.profile .min-profile-picture {
+  border: solid 1px var(--color-white);
+}
+
+.profile:hover {
+  background-color: var(--color-light-green);
+  border: solid 1px var(--color-green);
+}
+
+.profile.active {
+  color: var(--color-white);
+  background-color: var(--color-green);
+  border: solid 1px var(--color-green);
+  pointer-events: none;
+}
+
+/* Main */
 main {
   flex: 1;
 }
@@ -36,7 +106,4 @@ main {
 }
 
 @media screen and (max-width: 425px) {
-  body {
-    padding: 10px;
-  }
 }
