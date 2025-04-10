@@ -9,7 +9,10 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\String\Slugger\SluggerInterface;
+use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
 
 #[Route('/admin/recipe')]
 final class AdminRecipeController extends AbstractController
@@ -31,8 +34,12 @@ final class AdminRecipeController extends AbstractController
     }
 
     #[Route('/add/recipe', name: 'admin_recipe_add')]
-    public function add(Request $request, EntityManagerInterface $entityManager): Response
-    {
+    public function add(
+        Request $request,
+        EntityManagerInterface $entityManager,
+        SluggerInterface $slugger,
+        #[Autowire('%kernel.project_dir%/public/images/recipes')] string $imageDirectory
+    ): Response {
         $recipe = new Recipe();
         $recipe->setAuthor($this->getUser());
 
@@ -40,8 +47,23 @@ final class AdminRecipeController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            if (!$recipe->getImage()) {
-                $recipe->setImage('/images/default-recipe.jpg');
+            /** @var UploadedFile $image */
+            $image = $form->get('image')->getData();
+
+            if ($image) {
+                $originalFilename = pathinfo($image->getClientOriginalName(), PATHINFO_FILENAME);
+                $safeFilename = $slugger->slug($originalFilename);
+                $newFilename = $safeFilename . '-' . uniqid() . '.' . $image->guessExtension();
+
+                try {
+                    $image->move($imageDirectory, $newFilename);
+                } catch (FileException $e) {
+                    return new Response("Erreur lors de l'upload de l'image");
+                }
+
+                $recipe->setImage('images/recipes/' . $newFilename);
+            } else {
+                $recipe->setImage('images/recipes/img-recipe-default.webp');
             }
 
             $now = new \DateTimeImmutable();

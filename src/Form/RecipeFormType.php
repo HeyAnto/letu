@@ -9,7 +9,9 @@ use App\Form\QuantityFormType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Validator\Constraints\File;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
@@ -27,19 +29,24 @@ class RecipeFormType extends AbstractType
                     'placeholder' => 'Tarte aux pommes',
                 ],
             ])
-            ->add('image', TextType::class, [
-                'required' => false,
-                'label' => 'Image',
-                'attr' => [
-                    'placeholder' => 'URL de l\'image',
-                ],
-            ])
             ->add('description', TextareaType::class, [
                 'required' => true,
                 'label' => 'Description',
                 'attr' => [
                     'placeholder' => 'Délicieuse tarte classique à la pâte sablée, garnie de fines tranches de pommes caramélisées à la cannelle. Parfaite avec une boule de glace vanille !',
                     'rows' => 5,
+                ],
+            ])
+            ->add('image', FileType::class, [
+                'label' => "Image de l'ingrédient",
+                'mapped' => false,
+                'required' => false,
+                'constraints' => [
+                    new File([
+                        'maxSize' => '5M',
+                        'mimeTypes' => ['image/jpeg', 'image/png', 'image/webp'],
+                        'mimeTypesMessage' => 'Veuillez télécharger une image valide (JPEG, PNG, WEBP)',
+                    ])
                 ],
             ])
             ->add('serving', NumberType::class, [

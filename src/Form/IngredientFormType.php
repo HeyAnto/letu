@@ -2,7 +2,6 @@
 
 namespace App\Form;
 
-use App\Entity\Step;
 use App\Entity\Ingredient;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -36,11 +35,6 @@ class IngredientFormType extends AbstractType
                     ])
                 ],
             ])
-            // ->add('steps', EntityType::class, [
-            //     'class' => Step::class,
-            //     'choice_label' => 'id',
-            //     'multiple' => true,
-            // ])
         ;
     }
 
