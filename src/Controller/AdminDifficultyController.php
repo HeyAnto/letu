@@ -31,7 +31,6 @@ final class AdminDifficultyController extends AbstractController
         $difficulty = new Difficulty();
 
         $form = $this->createForm(DifficultyFormType::class, $difficulty);
-
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
