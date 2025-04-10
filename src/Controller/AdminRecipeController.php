@@ -27,12 +27,6 @@ final class AdminRecipeController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'admin_recipe_show')]
-    public function show(): Response
-    {
-        return $this->render('admin/admin_recipe/show.html.twig');
-    }
-
     #[Route('/add/recipe', name: 'admin_recipe_add')]
     public function add(
         Request $request,
@@ -87,6 +81,70 @@ final class AdminRecipeController extends AbstractController
         }
 
         return $this->render('admin/admin_recipe/add.html.twig', [
+            'form' => $form->createView(),
+        ]);
+    }
+
+    #[Route('/{id}', name: 'admin_recipe_show')]
+    public function show(): Response
+    {
+        return $this->render('admin/admin_recipe/show.html.twig');
+    }
+
+    #[Route('/edit/recipe/{id}', name: 'admin_recipe_edit')]
+    public function edit(
+        int $id,
+        RecipeRepository $recipeRepository,
+        EntityManagerInterface $entityManager,
+        Request $request,
+        SluggerInterface $slugger,
+        #[Autowire('%kernel.project_dir%/public/images/recipes')] string $imageDirectory
+    ): Response {
+        $recipe = $recipeRepository->find($id);
+
+        if (!$recipe) {
+            return new Response("Recette non trouvée", 404);
+        }
+
+        $form = $this->createForm(RecipeFormType::class, $recipe);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            /** @var UploadedFile $image */
+            $image = $form->get('image')->getData();
+
+            if ($image) {
+                $oldImage = $recipe->getImage();
+                if ($oldImage && $oldImage !== 'images/recipes/img-recipe-default.webp') {
+                    $oldFilePath = $imageDirectory . '/' . basename($oldImage);
+                    if (file_exists($oldFilePath)) {
+                        unlink($oldFilePath);
+                    }
+                }
+
+                $originalFilename = pathinfo($image->getClientOriginalName(), PATHINFO_FILENAME);
+                $safeFilename = $slugger->slug($originalFilename);
+                $newFilename = $safeFilename . '-' . uniqid() . '.' . $image->guessExtension();
+
+                try {
+                    $image->move($imageDirectory, $newFilename);
+                } catch (FileException $e) {
+                    return new Response("Erreur lors de l'upload de l'image");
+                }
+
+                $recipe->setImage('images/recipes/' . $newFilename);
+            }
+
+            $recipe->setUpdatedAt(new \DateTimeImmutable());
+
+            $entityManager->persist($recipe);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('admin_recipe_index');
+        }
+
+        return $this->render('admin/admin_recipe/edit.html.twig', [
+            'recipe' => $recipe,
             'form' => $form->createView(),
         ]);
     }
