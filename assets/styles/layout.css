@@ -58,8 +58,8 @@ header div {
 
 .btn-nav.active {
   color: var(--color-white);
-  background-color: var(--color-green);
-  border: solid 1px var(--color-green);
+  background-color: var(--color-grey);
+  border: solid 1px var(--color-grey);
   pointer-events: none;
 }
 
@@ -96,6 +96,17 @@ header div {
 /* Main */
 main {
   flex: 1;
+  padding: 100px 30px;
+}
+
+section {
+  width: 100%;
+  max-width: 500px;
+}
+
+.section-image {
+  width: 100%;
+  max-width: 600px;
 }
 
 /* Media Queries */

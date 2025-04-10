@@ -1,20 +1,30 @@
-{% extends 'base.html.twig' %}
+{% extends 'profil-base.html.twig' %}
 
 {% block title %}Register{% endblock %}
 
 {% block main %}
-<h1>Register</h1>
+<section class="flex flex-column gap-15">
+  <div>
+    <h1>Inscrivez-vous</h1>
+    <p>Vous avez déjà un compte ? <a class="text-link" href="{{ path('connexion_login') }}">Connectez-vous</a> !</p>
+  </div>
 
-{{ form_errors(registrationForm) }}
+  {{ form_errors(registrationForm) }}
 
-{{ form_start(registrationForm) }}
-{{ form_row(registrationForm.username) }}
-{{ form_row(registrationForm.email) }}
-{{ form_row(registrationForm.plainPassword, {
-label: 'Mot de passe'
-}) }}
-{{ form_row(registrationForm.agreeTerms) }}
+  {{ form_start(registrationForm) }}
+  {{ form_row(registrationForm.username) }}
+  {{ form_row(registrationForm.email) }}
+  {{ form_row(registrationForm.plainPassword, {
+  label: 'Mot de passe'
+  }) }}
+  <div class="flex flex-row gap-4">
+    {{ form_widget(registrationForm.agreeTerms) }}
+    {{ form_label(registrationForm.agreeTerms) }}
+    {{ form_errors(registrationForm.agreeTerms) }}
+  </div>
 
-<button type="submit" class="btn">Register</button>
-{{ form_end(registrationForm) }}
+
+  <button type="submit" class="btn btn-green">Inscription</button>
+  {{ form_end(registrationForm) }}
+</section>
 {% endblock %}

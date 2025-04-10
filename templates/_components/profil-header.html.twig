@@ -6,12 +6,20 @@
   </div>
 
   <div class="flex items-center justify-end gap-7">
+    {% if app.user %}
     <a class="profile {{ app.request.attributes.get('_route') starts with 'profile' ? 'active' : '' }}"
       href="{{ path('profile_index') }}">
       <img class="min-profile-picture" src="{{ asset(app.user.profilePicture) }}"
         alt="{{ app.user.username}}'s profile picture">
       {{ app.user.username }}
     </a>
+
+    {% else %}
+    <a class="btn-nav {{ app.request.attributes.get('_route') starts with 'connexion' ? 'active' : '' }}"
+      href="{{ path('connexion_login') }}">
+      Se connecter
+    </a>
+    {% endif %}
 
     <a class="btn btn-red" href="{{ path('connexion_logout') }}">Déconnexion</a>
   </div>

@@ -57,7 +57,7 @@ class RegistrationFormType extends AbstractType
                 ],
                 'attr' => [
                     'autocomplete' => 'email',
-                    'placeholder' => 'example@email.com',
+                    'placeholder' => 'exemple@email.com',
                 ],
             ])
             ->add('agreeTerms', CheckboxType::class, [
