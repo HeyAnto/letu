@@ -21,7 +21,7 @@ return [
         'entrypoint' => true,
     ],
     'recipe-form' => [
-        'path' => './assets/js/admin/recipe-form.js',
+        'path' => './assets/js/recipe-form.js',
         'entrypoint' => true,
     ],
     'delete-modal' => [

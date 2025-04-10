@@ -8,7 +8,7 @@
     <div class="flex flex-column gap-7">
         <p class="p-min text-grey">Vous pouvez enrichir votre profil en le modifiant.</p>
         <div class="flex gap-7">
-            <a class="btn" href="{{ path('profile_edit') }}">Modifier votre profil</a>
+            <a class="btn" href="{{ path('profile_edit', { id: app.user.id }) }}">Modifier votre profil</a>
             <a class="btn btn-green" href="{{ path('profile_recipe_add') }}">Créer une recette</a>
         </div>
     </div>
@@ -20,17 +20,22 @@
         <div class="flex flex-column gap-4">
             <h1>{{ user.username }}</h1>
             <h2>{{ user.firstName }} {{ user.lastName }}</h2>
-            <p>{{ user.birthAt }}</p>
+            <p>{{ user.birthAt ? user.birthAt|date('d/m/Y') : '' }}</p>
         </div>
     </div>
 </section>
 
 <section class="big-section flex flex-column gap-15">
     <h2 class="text-center">Recettes</h2>
+
+    {% if recipes is empty %}
+    <p class="text-center text-grey">Pas de recette pour le moment.</p>
+    {% else %}
     <div class="recipe-grid">
         {% for recipe in recipes %}
         {% include "_components/recipe-card.twig" %}
         {% endfor %}
     </div>
+    {% endif %}
 </section>
 {% endblock %}
