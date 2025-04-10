@@ -26,9 +26,9 @@
         <td>{{ recipe.difficulty.label }}</td>
         <td>{{ recipe.author.email }}</td>
         <td>
-          {# <a class="icon-action" href="{{ path('admin_recipe_show', { id: recipe.id }) }}">
+          <a class="icon-action" href="{{ path('admin_recipe_show', { id: recipe.id }) }}">
             <img class="icon-action" src="{{ asset('icons/icon-show.svg') }}" alt="Show">
-          </a> #}
+          </a>
 
           <a class="icon-action" href="{{ path('admin_recipe_edit', { id: recipe.id }) }}">
             <img class="icon-action" src="{{ asset('icons/icon-edit.svg') }}" alt="Edit">

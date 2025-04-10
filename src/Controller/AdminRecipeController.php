@@ -86,9 +86,13 @@ final class AdminRecipeController extends AbstractController
     }
 
     #[Route('/{id}', name: 'admin_recipe_show')]
-    public function show(): Response
+    public function show(RecipeRepository $recipeRepository, int $id): Response
     {
-        return $this->render('admin/admin_recipe/show.html.twig');
+        $recipe = $recipeRepository->find($id);
+
+        return $this->render('admin/admin_recipe/show.html.twig', [
+            'recipe' => $recipe,
+        ]);
     }
 
     #[Route('/edit/recipe/{id}', name: 'admin_recipe_edit')]

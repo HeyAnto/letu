@@ -240,6 +240,10 @@ select:invalid {
   height: 100px;
 }
 
+.table-img-recipe {
+  height: 300px;
+}
+
 /* Media Queries */
 @media screen and (max-width: 1024px) {
 }
