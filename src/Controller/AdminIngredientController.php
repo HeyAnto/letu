@@ -38,7 +38,7 @@ final class AdminIngredientController extends AbstractController
         $ingredient = new Ingredient();
 
         if (!$ingredient) {
-            return new Response("Produit non trouvé", 404);
+            return new Response("Ingrédient non trouvé", 404);
         }
 
         $form = $this->createForm(IngredientFormType::class, $ingredient);
@@ -97,7 +97,7 @@ final class AdminIngredientController extends AbstractController
         $ingredient = $ingredientRepository->find($id);
 
         if (!$ingredient) {
-            return new Response("Produit non trouvé", 404);
+            return new Response("Ingrédient non trouvé", 404);
         }
 
         $form = $this->createForm(IngredientFormType::class, $ingredient);

@@ -51,6 +51,30 @@ final class AdminDifficultyController extends AbstractController
         return $this->render('admin/admin_difficulty/show.html.twig');
     }
 
+    #[Route('/edit/difficulty/{id}', name: 'admin_difficulty_edit')]
+    public function edit(int $id, DifficultyRepository $difficultyRepository, EntityManagerInterface $entityManager, Request $request): Response
+    {
+        $difficulty = $difficultyRepository->find($id);
+
+        if (!$difficulty) {
+            return new Response("Difficulté non trouvée", 404);
+        }
+
+        $form = $this->createForm(difficultyFormType::class, $difficulty);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager->persist($difficulty);
+            $entityManager->flush();
+            return $this->redirectToRoute('admin_difficulty_index');
+        }
+
+        return $this->render('admin/admin_difficulty/edit.html.twig', [
+            'difficulty' => $difficulty,
+            'form' => $form->createView(),
+        ]);
+    }
+
     #[Route('/delete/difficulty/{id}', name: 'admin_difficulty_delete')]
     public function delete(DifficultyRepository $difficultyRepository, EntityManagerInterface $entityManager, int $id): Response
     {
