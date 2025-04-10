@@ -3,31 +3,34 @@
 {% block title %}Letu {{ app.user.username }}{% endblock %}
 
 {% block main %}
-<style>
-    .example-wrapper {
-        margin: 1em auto;
-        max-width: 800px;
-        width: 95%;
-        font: 18px/1.5 sans-serif;
-    }
+<section class="big-section flex flex-column gap-15">
+    {% if app.user and app.user.id == user.id %}
+    <div class="flex flex-column gap-7">
+        <p class="p-min text-grey">Vous pouvez enrichir votre profil en le modifiant.</p>
+        <div class="flex gap-7">
+            <a class="btn" href="{{ path('profile_edit') }}">Modifier votre profil</a>
+            <a class="btn btn-green" href="{{ path('profile_recipe_add') }}">Créer une recette</a>
+        </div>
+    </div>
+    {% endif %}
 
-    .example-wrapper code {
-        background: #F5F5F5;
-        padding: 2px 6px;
-    }
-</style>
+    <div class="profile-card flex items-center gap-15 p-6">
+        <img class="profile-picture" src="{{ asset(app.user.profilePicture) }}"
+            alt="{{ user.username }}'s profile picture">
+        <div class="flex flex-column gap-4">
+            <h1>{{ user.username }}</h1>
+            <h2>{{ user.firstName }} {{ user.lastName }}</h2>
+            <p>{{ user.birthAt }}</p>
+        </div>
+    </div>
+</section>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
-
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at
-            <code>C:/Users/User/Desktop/Works/Programmation/Symfony/Letu/letu/src/Controller/ProfileController.php</code>
-        </li>
-        <li>Your template at
-            <code>C:/Users/User/Desktop/Works/Programmation/Symfony/Letu/letu/templates/profile/index.html.twig</code>
-        </li>
-    </ul>
-</div>
+<section class="big-section flex flex-column gap-15">
+    <h2 class="text-center">Recettes</h2>
+    <div class="recipe-grid">
+        {% for recipe in recipes %}
+        {% include "_components/recipe-card.twig" %}
+        {% endfor %}
+    </div>
+</section>
 {% endblock %}

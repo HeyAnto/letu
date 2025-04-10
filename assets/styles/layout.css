@@ -18,7 +18,6 @@ html {
 }
 
 body {
-  overflow: hidden;
   width: 100%;
   max-width: 1920px;
   min-height: 100vh;
@@ -93,6 +92,16 @@ header div {
   pointer-events: none;
 }
 
+/* Profile Page */
+.profile-card {
+  border: solid 1px var(--color-green);
+  border-radius: 1rem;
+}
+
+.profile-card div {
+  height: 100%;
+}
+
 /* Main */
 main {
   flex: 1;
@@ -104,9 +113,18 @@ section {
   max-width: 500px;
 }
 
-.section-image {
+.big-section {
   width: 100%;
   max-width: 600px;
+}
+
+/* Recipe Grid */
+.recipe-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: 1fr;
+  grid-column-gap: 30px;
+  grid-row-gap: 60px;
 }
 
 /* Media Queries */

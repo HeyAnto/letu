@@ -80,6 +80,10 @@ p {
   line-height: var(--line-height-p-min);
 }
 
+.text-grey {
+  color: var(--color-grey);
+}
+
 .text-green {
   color: var(--color-green);
 }

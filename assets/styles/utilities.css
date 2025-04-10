@@ -58,6 +58,9 @@
 .gap-15 {
   gap: calc(var(--spacing-unit) * 15);
 }
+.gap-30 {
+  gap: calc(var(--spacing-unit) * 30);
+}
 .gap-50 {
   gap: calc(var(--spacing-unit) * 50);
 }
@@ -77,6 +80,9 @@
 }
 .p-5 {
   padding: calc(var(--spacing-unit) * 5);
+}
+.p-6 {
+  padding: calc(var(--spacing-unit) * 6);
 }
 .p-15 {
   padding: calc(var(--spacing-unit) * 15);
@@ -113,4 +119,9 @@
 /* Margin Top */
 .mt-8 {
   margin-top: calc(var(--spacing-unit) * 8);
+}
+
+/* Text Align */
+.text-center {
+  text-align: center;
 }

@@ -16,13 +16,13 @@
 </head>
 
 <body class="flex flex-column">
-    {% include "_components/profil-header.html.twig" %}
+    {% include "_components/profil-header.twig" %}
 
-    <main class="flex flex-column items-center">
+    <main class="flex flex-column items-center gap-30">
         {% block main %}{% endblock %}
     </main>
 
-    {% include "_components/footer.html.twig" %}
+    {% include "_components/footer.twig" %}
 </body>
 
 </html>

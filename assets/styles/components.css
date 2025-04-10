@@ -53,6 +53,13 @@
   border-radius: 0.25rem;
 }
 
+.profile-picture {
+  object-fit: cover;
+  width: 124px;
+  height: 124px;
+  border-radius: 0.75rem;
+}
+
 /* Icons */
 .icon {
   width: 24px;
@@ -147,4 +154,12 @@ select {
 
 select:invalid {
   color: var(--color-grey);
+}
+
+/* Recipe Card */
+.img-recipe-card {
+  object-fit: cover;
+  width: 100%;
+  height: 180px;
+  border-radius: 1rem;
 }

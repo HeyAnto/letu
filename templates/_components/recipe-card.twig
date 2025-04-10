@@ -1,0 +1,13 @@
+<div class="recipe-card flex flex-column gap-7">
+  <img class="img-recipe-card" src="{{ asset(recipe.image) }}" alt="{{ recipe.title }}" />
+  <div class="recipe-card-footer flex gap-7">
+    <div class="recipe-card-content flex flex-column gap-7">
+      <h2>{{ recipe.title }}</h2>
+      <a class="flex items-center gap-4" href="{{ path('profile_author', { id: recipe.author.id }) }}">
+        <img class="min-profile-picture" src="{{ asset(user.profilePicture) }}"
+          alt="{{ user.username }}'s profile picture">
+        <p>{{ user.username }}</p>
+      </a>
+    </div>
+  </div>
+</div>

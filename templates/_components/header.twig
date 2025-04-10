@@ -7,7 +7,7 @@
 
   <div class="flex items-center justify-end gap-7">
     {% if app.user %}
-    <a class="profile {{ app.request.attributes.get('_route') starts with 'profile' ? 'active' : '' }}"
+    <a class="profile {{ app.request.attributes.get('_route') == 'profile_index' ? 'active' : '' }}"
       href="{{ path('profile_index') }}">
       <img class="min-profile-picture" src="{{ asset(app.user.profilePicture) }}"
         alt="{{ app.user.username}}'s profile picture">
