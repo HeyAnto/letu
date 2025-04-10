@@ -31,7 +31,7 @@ final class AdminRecipeController extends AbstractController
     }
 
     #[Route('/add/recipe', name: 'admin_recipe_add')]
-    public function addRecipe(Request $request, EntityManagerInterface $entityManager): Response
+    public function add(Request $request, EntityManagerInterface $entityManager): Response
     {
         $recipe = new Recipe();
         $recipe->setAuthor($this->getUser());
