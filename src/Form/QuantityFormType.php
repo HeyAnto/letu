@@ -35,7 +35,7 @@ class QuantityFormType extends AbstractType
             ])
             ->add('unit', TextType::class, [
                 'label' => 'Unité (ex: g, ml, cuillère, cup...)',
-                'required' => true,
+                'required' => false,
                 'attr' => [
                     'placeholder' => 'Unité',
                 ],
