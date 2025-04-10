@@ -68,4 +68,14 @@ final class AdminRecipeController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
+
+    #[Route('/delete/recipe/{id}', name: 'admin_recipe_delete')]
+    public function delete(RecipeRepository $recipeRepository, EntityManagerInterface $entityManager, int $id): Response
+    {
+        $recipe = $recipeRepository->find($id);
+        $entityManager->remove($recipe);
+        $entityManager->flush();
+
+        return $this->redirectToRoute('admin_recipe_index');
+    }
 }
