@@ -24,6 +24,10 @@
         </td>
         <td>{{ ingredient.label }}</td>
         <td>
+          <a class="icon-action" href="{{ path('admin_ingredient_edit', { id: ingredient.id }) }}">
+            <img class="icon-action" src="{{ asset('icons/icon-edit.svg') }}" alt="Edit">
+          </a>
+
           <a class="icon-action delete-action" data-url="{{ path('admin_ingredient_delete', { id: ingredient.id }) }}">
             <img class="icon-action" src="{{ asset('icons/icon-delete.svg') }}" alt="Delete">
           </a>

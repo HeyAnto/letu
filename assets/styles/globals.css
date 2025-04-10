@@ -80,6 +80,10 @@ p {
   line-height: var(--line-height-p-min);
 }
 
+.text-green {
+  color: var(--color-green);
+}
+
 /* Reset */
 a {
   text-decoration: none;

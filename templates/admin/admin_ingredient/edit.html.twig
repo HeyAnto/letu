@@ -1,0 +1,22 @@
+{% extends 'admin/admin-base.html.twig' %}
+
+{% block main %}
+<section class="flex flex-column pt-15">
+  <a class="btn" href="{{ path('admin_ingredient_index') }}">Retour à la liste</a>
+</section>
+
+<section class="flex flex-column pt-15 gap-15">
+  <div>
+    <h1>Modifier l'ingredient</h1>
+    <h2 class="text-green">{{ ingredient.label }}</h2>
+  </div>
+
+  {{ form_start(form) }}
+
+  {{ form_widget(form) }}
+
+  <button class="btn btn-green mt-8" type="submit">Modifier</button>
+
+  {{ form_end(form) }}
+</section>
+{% endblock %}
