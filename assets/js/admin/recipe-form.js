@@ -1,5 +1,5 @@
 // Quantity Forms
-document.addEventListener("turbo:load", () => {
+document.addEventListener("DOMContentLoaded", () => {
   const container = document.getElementById("quantity-container");
   const addButton = document.getElementById("add-quantity");
   const prototype = container.dataset.prototype;
@@ -53,7 +53,7 @@ document.addEventListener("turbo:load", () => {
 });
 
 // Step Forms
-document.addEventListener("turbo:load", () => {
+document.addEventListener("DOMContentLoaded", () => {
   const container = document.getElementById("step-container");
   const addButton = document.getElementById("add-step");
   const prototype = container.dataset.prototype;

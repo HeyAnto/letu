@@ -20,6 +20,14 @@ return [
         'path' => './assets/app-admin.js',
         'entrypoint' => true,
     ],
+    'recipe-form' => [
+        'path' => './assets/js/admin/recipe-form.js',
+        'entrypoint' => true,
+    ],
+    'delete-modal' => [
+        'path' => './assets/js/delete-modal.js',
+        'entrypoint' => true,
+    ],
     '@hotwired/stimulus' => [
         'version' => '3.2.2',
     ],

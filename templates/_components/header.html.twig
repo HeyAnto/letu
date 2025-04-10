@@ -1,0 +1,24 @@
+<header>
+  <img src="{{ asset('logo.svg') }}" alt="Letu Logo">
+  {# <div class="account-links flex gap-20">
+    {% if app.user %}
+    <a href="{{ path('app_account') }}"
+      class="nav-link {{ app.request.attributes.get('_route') == 'app_account' ? 'active' : '' }}">
+      Compte
+    </a>
+
+    {% if is_granted('ROLE_ADMIN') %}
+    <a href="{{ path('admin_product_index') }}"
+      class="nav-link {{ app.request.attributes.get('_route') == 'admin_product_index' ? 'active' : '' }}">
+      Back-office
+    </a>
+    {% endif %}
+
+    {% else %}
+    <a href="{{ path('app_login') }}"
+      class="nav-link {{ app.request.attributes.get('_route') == 'app_login' ? 'active' : '' }}">
+      Se connecter
+    </a>
+    {% endif %}
+  </div> #}
+</header>

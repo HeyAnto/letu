@@ -1,4 +1,4 @@
-document.addEventListener("turbo:load", function () {
+document.addEventListener("DOMContentLoaded", function () {
   const modal = document.getElementById("confirmModal");
   const confirmButton = document.getElementById("confirmDelete");
   const cancelButton = document.getElementById("cancelDelete");

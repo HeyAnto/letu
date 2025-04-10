@@ -1,5 +1,11 @@
 {% extends 'admin/admin-base.html.twig' %}
 
+{% block javascripts %}
+{% block importmap %}
+{{ importmap(['app-admin', 'delete-modal']) }}
+{% endblock %}
+{% endblock %}
+
 {% block main %}
 <section class="flex flex-column pt-15">
   <a class="btn btn-green" href="{{ path('admin_difficulty_add') }}">Ajouter une difficulté</a>

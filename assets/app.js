@@ -1,4 +1,4 @@
-import "./bootstrap.js";
+// import "./bootstrap.js";
 
 // Styles
 import "./styles/globals.css";

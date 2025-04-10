@@ -1,5 +1,11 @@
 {% extends 'admin/admin-base.html.twig' %}
 
+{% block javascripts %}
+{% block importmap %}
+{{ importmap(['app-admin', 'delete-modal']) }}
+{% endblock %}
+{% endblock %}
+
 {% block main %}
 <section class="flex pt-15 gap-7">
   <a class="btn" href="{{ path('admin_category_index') }}">Retour à la liste</a>
