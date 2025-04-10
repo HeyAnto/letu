@@ -2,9 +2,9 @@
   <a href="{{ path('recipe_show', {id: recipe.id}) }}">
     <div class="flex flex-column gap-7">
 
-      <img class="img-card img-recipe-card" src="{{ asset(recipe.image) }}" alt="{{ recipe.title }}" />
+      <img class="img-card img-recipe-primary-card" src="{{ asset(recipe.image) }}" alt="{{ recipe.title }}" />
 
-      <div class="flex flex-column justify-between gap-4">
+      <div class="flex flex-wrap justify-between gap-4">
         <h2>{{ recipe.title }}</h2>
 
         <div class="flex flex-wrap items-center gap-7">

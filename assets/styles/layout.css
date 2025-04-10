@@ -118,6 +118,11 @@ section {
   max-width: 600px;
 }
 
+/* Title */
+.title-logo {
+  height: 20px;
+}
+
 /* Recipe Grid */
 .recipe-grid {
   display: grid;

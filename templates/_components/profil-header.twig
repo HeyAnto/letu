@@ -14,13 +14,13 @@
       {{ app.user.username }}
     </a>
 
+    <a class="btn btn-red" href="{{ path('connexion_logout') }}">Déconnexion</a>
+
     {% else %}
     <a class="btn-nav {{ app.request.attributes.get('_route') starts with 'connexion' ? 'active' : '' }}"
       href="{{ path('connexion_login') }}">
       Se connecter
     </a>
     {% endif %}
-
-    <a class="btn btn-red" href="{{ path('connexion_logout') }}">Déconnexion</a>
   </div>
 </header>

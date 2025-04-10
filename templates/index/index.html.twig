@@ -1,5 +1,25 @@
 {% extends 'base.html.twig' %}
 
 {% block main %}
+<section class="big-section flex flex-column gap-15">
+  <div class="flex items-center justify-center gap-3">
+    <h2>Dernière recette publiée sur <img class="title-logo" src="{{ asset('logo.svg') }}" alt="Letu Logo"></h2>
+  </div>
 
+  <div>
+    {% if recipes|length > 0 %}
+    {% include "_components/recipe-primary-card.twig" with {
+    recipe: recipes[0]
+    } only %}
+    {% endif %}
+  </div>
+
+  <div class="recipe-grid">
+    {% for recipe in recipes|slice(1) %}
+    {% include "_components/recipe-card.twig" with {
+    recipe: recipe
+    } only %}
+    {% endfor %}
+  </div>
+</section>
 {% endblock %}

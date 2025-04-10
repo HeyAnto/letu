@@ -1,6 +1,6 @@
 {% extends 'profil-base.html.twig' %}
 
-{% block title %}Letu {{ app.user.username }}{% endblock %}
+{% block title %}Letu - {{ user.username }}{% endblock %}
 
 {% block main %}
 <section class="big-section flex flex-column gap-15">
@@ -8,6 +8,9 @@
     <div class="flex flex-column gap-7">
         <p class="p-min text-grey">Vous pouvez enrichir votre profil en le modifiant.</p>
         <div class="flex gap-7">
+            {% if is_granted('ROLE_ADMIN') %}
+            <a class="btn" href="{{ path('admin_index') }}">Back-office</a>
+            {% endif %}
             <a class="btn" href="{{ path('profile_edit', { id: app.user.id }) }}">Modifier votre profil</a>
             <a class="btn btn-green" href="{{ path('profile_recipe_add') }}">Créer une recette</a>
         </div>
@@ -15,8 +18,7 @@
     {% endif %}
 
     <div class="profile-card flex items-center gap-15 p-6">
-        <img class="profile-picture" src="{{ asset(app.user.profilePicture) }}"
-            alt="{{ user.username }}'s profile picture">
+        <img class="profile-picture" src="{{ asset(user.profilePicture) }}" alt="{{ user.username }}'s profile picture">
         <div class="flex flex-column gap-4">
             <h1>{{ user.username }}</h1>
             <h2>{{ user.firstName }} {{ user.lastName }}</h2>
