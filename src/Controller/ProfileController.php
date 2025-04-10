@@ -157,7 +157,7 @@ final class ProfileController extends AbstractController
             $entityManager->persist($recipe);
             $entityManager->flush();
 
-            return $this->redirectToRoute('admin_recipe_index');
+            return $this->redirectToRoute('profile_index');
         }
 
         return $this->render('profile/add.html.twig', [
