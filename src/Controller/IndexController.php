@@ -78,6 +78,10 @@ final class IndexController extends AbstractController
     {
         $user = $this->getUser();
 
+        if (!$user || $comment->getUser() !== $user) {
+            return $this->redirectToRoute('profile_index');
+        }
+
         $recipeId = $comment->getRecipe()->getId();
 
         $em->remove($comment);

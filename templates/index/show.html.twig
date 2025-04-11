@@ -123,15 +123,22 @@
     <h2>Commentaires</h2>
     <span class="separation-line"></span>
   </div>
-
+  {% if app.user %}
   <div class="flex flex-column gap-15">
     {{ form_start(commentForm) }}
 
     {{ form_widget(commentForm) }}
 
-    <button class="btn btn-green" type="submit">Ajouter le commentaire</button>
+    <button class="btn btn-green" type="submit">Ajouter un commentaire</button>
 
     {{ form_end(commentForm) }}
+
+    {% else %}
+    <div class="flex flex-column items-center gap-6">
+      <p>Connectez-vous pour commenter cette recette !</p>
+      <a href="{{ path('connexion_login') }}" class="btn btn-green">Se connecter</a>
+    </div>
+    {% endif %}
 
     {% for comment in comments %}
     <div class="comment-card flex flex-column p-6 gap-6">
@@ -151,6 +158,7 @@
       </form>
       {% endif %}
     </div>
+
     {% else %}
     <p class="text-grey text-center">Aucun commentaire pour le moment.</p>
     {% endfor %}

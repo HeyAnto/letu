@@ -246,9 +246,22 @@ final class ProfileController extends AbstractController
     }
 
     #[Route('/recipe/delete/{id}', name: 'profile_recipe_delete')]
-    public function delete(RecipeRepository $recipeRepository, EntityManagerInterface $entityManager, int $id): Response
-    {
+    public function delete(
+        RecipeRepository $recipeRepository,
+        EntityManagerInterface $entityManager,
+        int $id
+    ): Response {
         $recipe = $recipeRepository->find($id);
+
+        if (!$recipe) {
+            return $this->redirectToRoute('index');
+        }
+
+        $user = $this->getUser();
+        if (!$user || $recipe->getAuthor() !== $user) {
+            return $this->redirectToRoute('profile_index');
+        }
+
         $entityManager->remove($recipe);
         $entityManager->flush();
 
