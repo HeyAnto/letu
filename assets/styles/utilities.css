@@ -55,6 +55,9 @@
 .gap-7 {
   gap: calc(var(--spacing-unit) * 7);
 }
+.gap-10 {
+  gap: calc(var(--spacing-unit) * 10);
+}
 .gap-15 {
   gap: calc(var(--spacing-unit) * 15);
 }
@@ -117,6 +120,9 @@
 }
 
 /* Margin Top */
+.mt-6 {
+  margin-top: calc(var(--spacing-unit) * 6);
+}
 .mt-8 {
   margin-top: calc(var(--spacing-unit) * 8);
 }

@@ -25,7 +25,7 @@ class QuantityFormType extends AbstractType
             ])
             ->add('amount', NumberType::class, [
                 'label' => 'Quantité',
-                'required' => true,
+                'required' => false,
                 'attr' => [
                     'min' => 0.1,
                     'max' => 2000,

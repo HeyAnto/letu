@@ -1,19 +1,73 @@
 {% extends 'profil-base.html.twig' %}
 
-{% block title %}Log in!{% endblock %}
+{% block title %}Letu {{ app.user.username }}{% endblock %}
+
+{% block javascripts %}
+{% block importmap %}
+{{ importmap(['app', 'recipe-form']) }}
+{% endblock %}
+{% endblock %}
 
 {% block main %}
 <section class="flex flex-column gap-15">
+    <a class="btn" href="{{ path('profile_index') }}">Retour au profil</a>
+
     <div>
-        <h1>Modifier votre profil</h1>
+        <h1>Modifier la recette</h1>
+        <h2 class="text-green">{{ recipe.title }}</h2>
     </div>
 
     {{ form_start(form) }}
 
-    {{ form_widget(form) }}
+    {{ form_row(form.title) }}
+    {{ form_row(form.description) }}
+    {{ form_row(form.image) }}
+    {{ form_row(form.serving) }}
+    {{ form_row(form.preparationTime) }}
+    {{ form_row(form.category) }}
+    {{ form_row(form.difficulty) }}
 
-    <button class="btn btn-green mt-8" type="submit">Modifier</button>
+    <div class="flex flex-row items-center gap-4 pt-15">
+        <img class="icon" src="{{ asset('icons/icon-ingredient.svg') }}" alt="Icon Ingredient">
+        <h2>Ingrédients</h2>
+        <span class="separation-line"></span>
+    </div>
 
+    {% set quantity_prototype_html %}
+    {{ form_widget(form.quantity.vars.prototype) }}
+    {% endset %}
+
+    <div id="quantity-container" data-prototype="{{ quantity_prototype_html|e('html_attr') }}">
+        {% for quantityForm in form.quantity %}
+        <div class="form-group">
+            {{ form_row(quantityForm) }}
+        </div>
+        {% endfor %}
+    </div>
+
+    <button type="button" id="add-quantity" class="btn btn-full mt-8">Ajouter un ingrédient</button>
+
+    <div class="flex flex-row items-center gap-4 pt-15">
+        <img class="icon" src="{{ asset('icons/icon-step.svg') }}" alt="Icon Step">
+        <h2>Préparation</h2>
+        <span class="separation-line"></span>
+    </div>
+
+    {% set step_prototype_html %}
+    {{ form_widget(form.step.vars.prototype) }}
+    {% endset %}
+
+    <div id="step-container" data-prototype="{{ step_prototype_html|e('html_attr') }}">
+        {% for stepForm in form.step %}
+        <div class="form-group">
+            {{ form_row(stepForm) }}
+        </div>
+        {% endfor %}
+    </div>
+
+    <button type="button" id="add-step" class="btn btn-full mt-8">Ajouter une étape</button>
+
+    <button type="submit" class="btn btn-full btn-green mt-8">Modifier</button>
     {{ form_end(form) }}
 </section>
 {% endblock %}

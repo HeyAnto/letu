@@ -99,3 +99,7 @@ button {
   border: none;
   cursor: pointer;
 }
+
+strong {
+  font-weight: var(--font-weight-bold);
+}

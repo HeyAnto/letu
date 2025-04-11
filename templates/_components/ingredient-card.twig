@@ -1,0 +1,7 @@
+<div class="ingredient-card flex flex-column gap-2">
+  <img class="img-ingredient-card" src="{{ asset(quantity.ingredient.image) }}" alt="{{ quantity.ingredient.label }}" />
+  <div class="flex flex-column">
+    <strong class="text-center">{{ quantity.amount }} {{ quantity.unit }}</strong>
+    <p class="text-center">{{ quantity.ingredient.label }}</p>
+  </div>
+</div>

@@ -101,7 +101,7 @@ final class ProfileController extends AbstractController
             return $this->redirectToRoute('profile_index');
         }
 
-        return $this->render('profile/edit.html.twig', [
+        return $this->render('profile/profile-edit.html.twig', [
             'user' => $user,
             'form' => $form->createView(),
         ]);
@@ -112,7 +112,7 @@ final class ProfileController extends AbstractController
         Request $request,
         EntityManagerInterface $entityManager,
         SluggerInterface $slugger,
-        #[Autowire('%kernel.project_dir%/public/profilePictures/recipes')] string $profilePictureDirectory
+        #[Autowire('%kernel.project_dir%/public/images/recipes')] string $imageDirectory
     ): Response {
         $recipe = new Recipe();
         $recipe->setAuthor($this->getUser());
@@ -130,9 +130,9 @@ final class ProfileController extends AbstractController
                 $newFilename = $safeFilename . '-' . uniqid() . '.' . $image->guessExtension();
 
                 try {
-                    $image->move($profilePictureDirectory, $newFilename);
+                    $image->move($imageDirectory, $newFilename);
                 } catch (FileException $e) {
-                    return new Response("Erreur lors de l'upload de l'profilePicture");
+                    return new Response("Erreur lors de l'upload de l'image");
                 }
 
                 $recipe->setImage('images/recipes/' . $newFilename);
@@ -165,15 +165,87 @@ final class ProfileController extends AbstractController
         ]);
     }
 
-    #[Route('/recipe/edit', name: 'profile_recipe_edit')]
-    public function edit(): Response
-    {
-        return $this->render('profile/index.html.twig');
+    #[Route('recipe/edit/{id}', name: 'profile_recipe_edit')]
+    public function edit(
+        int $id,
+        Request $request,
+        RecipeRepository $recipeRepository,
+        EntityManagerInterface $entityManager,
+        SluggerInterface $slugger,
+        #[Autowire('%kernel.project_dir%/public/images/recipes')] string $imageDirectory
+    ): Response {
+        $recipe = $recipeRepository->find($id);
+
+        if (!$recipe) {
+            $this->addFlash('error', 'Recette non trouvée');
+            return $this->redirectToRoute('profile_index');
+        }
+
+        $oldImage = $recipe->getImage();
+
+        $form = $this->createForm(RecipeFormType::class, $recipe);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            /** @var UploadedFile $image */
+            $image = $form->get('image')->getData();
+
+            if ($image) {
+                if ($oldImage && $oldImage !== 'images/recipes/img-recipe-default.webp') {
+                    $oldImagePath = $this->getParameter('kernel.project_dir') . '/public/' . $oldImage;
+                    if (file_exists($oldImagePath)) {
+                        unlink($oldImagePath);
+                    }
+                }
+
+                $originalFilename = pathinfo($image->getClientOriginalName(), PATHINFO_FILENAME);
+                $safeFilename = $slugger->slug($originalFilename);
+                $newFilename = $safeFilename . '-' . uniqid() . '.' . $image->guessExtension();
+
+                try {
+                    $image->move($imageDirectory, $newFilename);
+                    $recipe->setImage('images/recipes/' . $newFilename);
+                } catch (FileException $e) {
+                    $this->addFlash('error', 'Erreur lors de l\'upload de l\'image');
+                    return $this->redirectToRoute('profile_recipe_edit', ['id' => $id]);
+                }
+            }
+
+            foreach ($recipe->getQuantity() as $quantity) {
+                if (!$quantity->getRecipe()) {
+                    $quantity->setRecipe($recipe);
+                }
+                $entityManager->persist($quantity);
+            }
+
+            foreach ($recipe->getStep() as $step) {
+                if (!$step->getRecipe()) {
+                    $step->setRecipe($recipe);
+                }
+                $entityManager->persist($step);
+            }
+
+            $recipe->setUpdatedAt(new \DateTimeImmutable());
+
+            $entityManager->flush();
+            $this->addFlash('success', 'Recette mise à jour avec succès!');
+
+            return $this->redirectToRoute('profile_index');
+        }
+
+        return $this->render('profile/edit.html.twig', [
+            'form' => $form->createView(),
+            'recipe' => $recipe,
+        ]);
     }
 
-    #[Route('/recipe/delete', name: 'profile_recipe_delete')]
-    public function delete(): Response
+    #[Route('/recipe/delete/{id}', name: 'profile_recipe_delete')]
+    public function delete(RecipeRepository $recipeRepository, EntityManagerInterface $entityManager, int $id): Response
     {
-        return $this->render('profile/index.html.twig');
+        $recipe = $recipeRepository->find($id);
+        $entityManager->remove($recipe);
+        $entityManager->flush();
+
+        return $this->redirectToRoute('profile_index');
     }
 }

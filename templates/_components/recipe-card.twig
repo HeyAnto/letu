@@ -4,31 +4,29 @@
 
       <img class="img-card img-recipe-card" src="{{ asset(recipe.image) }}" alt="{{ recipe.title }}" />
 
-      <div class="flex flex-column justify-between gap-4">
-        <h2>{{ recipe.title }}</h2>
+      <h2>{{ recipe.title }}</h2>
 
-        <div class="flex flex-wrap items-center gap-7">
-          <div class="flex items-center gap-2">
-            <img class="icon" src="{{ asset('icons/icon-timer.svg') }}" alt="Icon Timer">
-            <p>{{ recipe.preparationTime }}min</p>
-          </div>
-
-          <div class="flex items-center gap-2">
-            <img class="icon" src="{{ asset('icons/icon-like.svg') }}" alt="Icon Like">
-            <p>14</p>
-          </div>
-        </div>
-
-      </div>
     </div>
   </a>
-  <div>
+  <div class="flex justify-between items-center gap-7">
 
     <a class="flex items-center gap-4" href="{{ path('profile_author', { id: recipe.author.id }) }}">
       <img class="min-profile-picture" src="{{ asset(recipe.author.profilePicture) }}"
         alt="{{ recipe.author.username }}'s profile picture">
       <p>{{ recipe.author.username }}</p>
     </a>
+
+    <div class="flex flex-wrap items-center gap-7">
+      <div class="flex items-center gap-2">
+        <img class="icon" src="{{ asset('icons/icon-timer.svg') }}" alt="Icon Timer">
+        <p>{{ recipe.preparationTime }}min</p>
+      </div>
+
+      {# <div class="flex items-center gap-2">
+        <img class="icon" src="{{ asset('icons/icon-like.svg') }}" alt="Icon Like">
+        <p>14</p>
+      </div> #}
+    </div>
 
   </div>
 </div>

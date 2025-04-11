@@ -2,8 +2,129 @@
 
 {% block title %}Letu - {{ recipe.title }}{% endblock %}
 
-{% block main %}
-<section class="big-section flex flex-column gap-15">
+{% block javascripts %}
+{% block importmap %}
+{{ importmap(['app', 'delete-modal']) }}
+{% endblock %}
+{% endblock %}
 
+
+{% block main %}
+{% if app.user and recipe.author.id == app.user.id %}
+<section class="flex pt-15 gap-7">
+  <a class="btn" href="{{ path('profile_recipe_edit', { id: recipe.id }) }}">Modifier la recette</a>
+  <a class="btn btn-red delete-action" data-url="{{ path('profile_recipe_delete', { id: recipe.id }) }}">
+    Supprimer la recette
+  </a>
 </section>
+{% endif %}
+
+<section class="flex flex-column gap-15">
+  <div class="flex flex-column gap-2">
+    <a class="flex items-center gap-4" href="{{ path('profile_author', { id: recipe.author.id }) }}">
+      <img class="min-profile-picture" src="{{ asset(recipe.author.profilePicture) }}"
+        alt="{{ recipe.author.username }}'s profile picture">
+      <p>{{ recipe.author.username }}</p>
+    </a>
+
+    <div class="flex flex-wrap justify-between items-center">
+      <p>Publiée le {{ recipe.createdAt|date('d/m/Y') }}</p>
+
+      {# <div class="flex items-center gap-2">
+        <img class="icon" src="{{ asset('icons/icon-like.svg') }}" alt="Icon Like">
+        <p>14</p>
+      </div> #}
+    </div>
+  </div>
+  <div class="flex flex-column gap-5">
+    <h1>{{ recipe.title }}</h1>
+    <p>{{ recipe.description }}</p>
+  </div>
+</section>
+
+<section class="big-section flex flex-column gap-15">
+  <img class="img-card img-recipe-primary-card" src="{{ asset(recipe.image) }}" alt="{{ recipe.title }}" />
+</section>
+
+<section class="recipe-information flex flex-column p-6 gap-7">
+  <div class="content-grid">
+    <div class="flex flex-column items-center justify-start gap-2">
+      <img class="icon" src="{{ asset('icons/icon-timer.svg') }}" alt="Icon Timer">
+      <p class="text-center">{{ recipe.preparationTime }}min</p>
+    </div>
+
+    <div class="flex flex-column items-center justify-start gap-2">
+      <img class="icon" src="{{ asset('icons/icon-difficulty.svg') }}" alt="Icon Difficulty">
+      <p class="text-center">{{ recipe.difficulty.label }}</p>
+    </div>
+
+    <div class="flex flex-column items-center justify-start gap-2">
+      <img class="icon" src="{{ asset('icons/icon-category.svg') }}" alt="Icon Category">
+      <p class="text-center">{{ recipe.category.label }}</p>
+    </div>
+  </div>
+  <div class="content-grid">
+    <div class="flex justify-center">
+      <p class="p-min text-grey text-center">Durée</p>
+    </div>
+
+    <div class="flex justify-center">
+      <p class="p-min text-grey text-center">Difficulté</p>
+    </div>
+
+    <div class="flex justify-center">
+      <p class="p-min text-grey text-center">Catégorie</p>
+    </div>
+  </div>
+</section>
+
+<section class="flex flex-column gap-15">
+  <div class="flex flex-row items-center gap-4 pt-15">
+    <img class="icon" src="{{ asset('icons/icon-ingredient.svg') }}" alt="Icon Ingredient">
+    <h2>Ingrédients</h2>
+    <span class="separation-line"></span>
+  </div>
+
+  {# Un input avec un - pour réduire, à gauche le nombre de portions (ex: 4 personnes) au centre et à droite un + pour
+  augmenter le nombre
+  Influence la quantité des ingrédients #}
+
+  <div class="ingredient-grid">
+    {% for quantity in recipe.quantity %}
+    {% include "_components/ingredient-card.twig" %}
+    {% endfor %}
+  </div>
+</section>
+
+<section class="flex flex-column gap-15">
+  <div class="flex flex-row items-center gap-4 pt-15">
+    <img class="icon" src="{{ asset('icons/icon-step.svg') }}" alt="Icon Ingredient">
+    <h2>Préparation</h2>
+    <span class="separation-line"></span>
+  </div>
+
+  <div class="flex flex-column gap-15">
+    {% for step in recipe.step %}
+    <div class="flex flex-column gap-3">
+      <h2>Étape {{ step.stepNumber }}</h2>
+      <p class="text-grey">{{ step.description }}</p>
+      <div class="flex flex-wrap gap-7">
+        {% for ingredient in step.ingredient %}
+        <strong class="p-min">{{ ingredient.label }}</strong>
+        {% endfor %}
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</section>
+
+<div class="modal-overlay" id="confirmModal">
+  <div class="modal-content flex flex-column gap-15">
+    <p>Êtes-vous sûr de vouloir supprimer cette recette ?</p>
+    <div class="flex justify-center gap-15">
+      <button class="btn btn-red" id="confirmDelete">Supprimer</button>
+      <button class="btn" id="cancelDelete">Annuler</button>
+    </div>
+  </div>
+</div>
 {% endblock %}
