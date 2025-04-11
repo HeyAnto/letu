@@ -125,10 +125,35 @@
   </div>
 
   <div class="flex flex-column gap-15">
-    {# Formulaire d'ajout de commentaire avec un textarea et un bouton #}
-    <div class="comment-card flex flex-column p-6 gap-6">
+    {{ form_start(commentForm) }}
 
+    {{ form_widget(commentForm) }}
+
+    <button class="btn btn-green" type="submit">Ajouter le commentaire</button>
+
+    {{ form_end(commentForm) }}
+
+    {% for comment in comments %}
+    <div class="comment-card flex flex-column p-6 gap-6">
+      <div class="flex flex-wrap justify-between items-center">
+        <a class="flex items-center gap-4" href="{{ path('profile_author', { id: comment.user.id }) }}">
+          <img class="min-profile-picture" src="{{ asset(comment.user.profilePicture) }}"
+            alt="Photo de {{ comment.user.username }}">
+          <p>{{ comment.user.username }}</p>
+        </a>
+        <p class="p-min">Publiée le {{ comment.createdAt|date('d/m/Y à H:i') }}</p>
+      </div>
+      <p>{{ comment.content }}</p>
+      {% if app.user and app.user == comment.user %}
+      <form action="{{ path('recipe_delete_comment', { id: comment.id }) }}" method="post"
+        onsubmit="return confirm('Supprimer ce commentaire ?');">
+        <button class="btn btn-red" type="submit">Supprimer</button>
+      </form>
+      {% endif %}
     </div>
+    {% else %}
+    <p class="text-grey text-center">Aucun commentaire pour le moment.</p>
+    {% endfor %}
   </div>
 </section>
 

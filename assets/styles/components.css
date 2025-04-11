@@ -223,3 +223,9 @@ select:invalid {
 .img-recipe-primary-card {
   height: 380px;
 }
+
+/* Comment */
+.comment-card {
+  border: solid 1px var(--color-grey);
+  border-radius: 0.375rem;
+}
