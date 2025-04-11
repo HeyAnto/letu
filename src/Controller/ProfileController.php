@@ -95,6 +95,9 @@ final class ProfileController extends AbstractController
                 $user->setprofilePicture('images/profile-pictures/' . $newFilename);
             }
 
+            $now = new \DateTimeImmutable();
+            $user->setUpdatedAt($now);
+
             $entityManager->persist($user);
             $entityManager->flush();
 
@@ -210,6 +213,9 @@ final class ProfileController extends AbstractController
                     return $this->redirectToRoute('profile_recipe_edit', ['id' => $id]);
                 }
             }
+
+            $now = new \DateTimeImmutable();
+            $recipe->setUpdatedAt($now);
 
             foreach ($recipe->getQuantity() as $quantity) {
                 if (!$quantity->getRecipe()) {

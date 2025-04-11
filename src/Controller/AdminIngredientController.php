@@ -27,7 +27,7 @@ final class AdminIngredientController extends AbstractController
         ]);
     }
 
-    #[Route('/add/ingredient', name: 'admin_ingredient_add')]
+    #[Route('/add', name: 'admin_ingredient_add')]
     public function add(
         EntityManagerInterface $entityManager,
         Request $request,
@@ -85,7 +85,7 @@ final class AdminIngredientController extends AbstractController
         ]);
     }
 
-    #[Route('/edit/ingredient/{id}', name: 'admin_ingredient_edit')]
+    #[Route('/edit/{id}', name: 'admin_ingredient_edit')]
     public function edit(
         int $id,
         IngredientRepository $ingredientRepository,
@@ -141,7 +141,7 @@ final class AdminIngredientController extends AbstractController
         ]);
     }
 
-    #[Route('/delete/ingredient/{id}', name: 'admin_ingredient_delete')]
+    #[Route('/delete/{id}', name: 'admin_ingredient_delete')]
     public function delete(IngredientRepository $ingredientRepository, EntityManagerInterface $entityManager, int $id): Response
     {
         $ingredient = $ingredientRepository->find($id);

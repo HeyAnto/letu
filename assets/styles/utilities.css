@@ -52,6 +52,9 @@
 .gap-5 {
   gap: calc(var(--spacing-unit) * 5);
 }
+.gap-6 {
+  gap: calc(var(--spacing-unit) * 6);
+}
 .gap-7 {
   gap: calc(var(--spacing-unit) * 7);
 }

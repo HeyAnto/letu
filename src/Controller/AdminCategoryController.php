@@ -24,7 +24,7 @@ final class AdminCategoryController extends AbstractController
         ]);
     }
 
-    #[Route('/add/category', name: 'admin_category_add')]
+    #[Route('/add', name: 'admin_category_add')]
     public function add(EntityManagerInterface $entityManager, Request $request): Response
     {
         $category = new Category();
@@ -53,7 +53,7 @@ final class AdminCategoryController extends AbstractController
         ]);
     }
 
-    #[Route('/edit/category/{id}', name: 'admin_category_edit')]
+    #[Route('/edit/{id}', name: 'admin_category_edit')]
     public function edit(int $id, CategoryRepository $categoryRepository, EntityManagerInterface $entityManager, Request $request): Response
     {
         $category = $categoryRepository->find($id);
@@ -77,7 +77,7 @@ final class AdminCategoryController extends AbstractController
         ]);
     }
 
-    #[Route('/delete/category/{id}', name: 'admin_category_delete')]
+    #[Route('/delete/{id}', name: 'admin_category_delete')]
     public function delete(CategoryRepository $categoryRepository, EntityManagerInterface $entityManager, int $id): Response
     {
         $category = $categoryRepository->find($id);

@@ -7,7 +7,7 @@
 {% endblock %}
 
 {% block main %}
-<section class="flex pt-15 gap-7">
+<section class="flex flex-wrap pt-15 gap-7">
   <a class="btn" href="{{ path('admin_category_index') }}">Retour à la liste</a>
   <a class="btn" href="{{ path('admin_category_edit', { id: category.id }) }}">Modifier la catégorie</a>
   <a class="btn btn-red delete-action" data-url="{{ path('admin_category_delete', { id: category.id }) }}">

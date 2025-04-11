@@ -30,7 +30,7 @@
         <td>{{ recipe.title }}</td>
         <td>{{ recipe.category.label }}</td>
         <td>{{ recipe.difficulty.label }}</td>
-        <td>{{ recipe.author.email }}</td>
+        <td>{{ recipe.author.username }}</td>
         <td>
           <a class="icon-action" href="{{ path('admin_recipe_show', { id: recipe.id }) }}">
             <img class="icon-action" src="{{ asset('icons/icon-show.svg') }}" alt="Show">

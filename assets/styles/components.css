@@ -206,6 +206,10 @@ select:invalid {
 }
 
 /* Recipe Card */
+.recipe-card:hover {
+  transform: scale(0.99);
+}
+
 .img-card {
   object-fit: cover;
   width: 100%;

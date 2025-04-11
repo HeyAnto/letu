@@ -7,7 +7,7 @@
 {% endblock %}
 
 {% block main %}
-<section class="flex pt-15 gap-7">
+<section class="flex flex-wrap pt-15 gap-7">
   <a class="btn" href="{{ path('admin_ingredient_index') }}">Retour à la liste</a>
   <a class="btn" href="{{ path('admin_ingredient_edit', { id: ingredient.id }) }}">Modifier l'ingredient</a>
   <a class="btn btn-red delete-action" data-url="{{ path('admin_ingredient_delete', { id: ingredient.id }) }}">

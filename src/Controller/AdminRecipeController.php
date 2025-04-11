@@ -27,7 +27,7 @@ final class AdminRecipeController extends AbstractController
         ]);
     }
 
-    #[Route('/add/recipe', name: 'admin_recipe_add')]
+    #[Route('/add', name: 'admin_recipe_add')]
     public function add(
         Request $request,
         EntityManagerInterface $entityManager,
@@ -95,7 +95,7 @@ final class AdminRecipeController extends AbstractController
         ]);
     }
 
-    #[Route('/edit/recipe/{id}', name: 'admin_recipe_edit')]
+    #[Route('/edit/{id}', name: 'admin_recipe_edit')]
     public function edit(
         int $id,
         RecipeRepository $recipeRepository,
@@ -139,7 +139,8 @@ final class AdminRecipeController extends AbstractController
                 $recipe->setImage('images/recipes/' . $newFilename);
             }
 
-            $recipe->setUpdatedAt(new \DateTimeImmutable());
+            $now = new \DateTimeImmutable();
+            $recipe->setUpdatedAt($now);
 
             $entityManager->persist($recipe);
             $entityManager->flush();
@@ -153,7 +154,7 @@ final class AdminRecipeController extends AbstractController
         ]);
     }
 
-    #[Route('/delete/recipe/{id}', name: 'admin_recipe_delete')]
+    #[Route('/delete/{id}', name: 'admin_recipe_delete')]
     public function delete(RecipeRepository $recipeRepository, EntityManagerInterface $entityManager, int $id): Response
     {
         $recipe = $recipeRepository->find($id);

@@ -25,7 +25,7 @@ final class AdminDifficultyController extends AbstractController
         ]);
     }
 
-    #[Route('/add/difficulty', name: 'admin_difficulty_add')]
+    #[Route('/add', name: 'admin_difficulty_add')]
     public function add(EntityManagerInterface $entityManager, Request $request): Response
     {
         $difficulty = new Difficulty();
@@ -54,7 +54,7 @@ final class AdminDifficultyController extends AbstractController
         ]);
     }
 
-    #[Route('/edit/difficulty/{id}', name: 'admin_difficulty_edit')]
+    #[Route('/edit/{id}', name: 'admin_difficulty_edit')]
     public function edit(int $id, DifficultyRepository $difficultyRepository, EntityManagerInterface $entityManager, Request $request): Response
     {
         $difficulty = $difficultyRepository->find($id);
@@ -78,7 +78,7 @@ final class AdminDifficultyController extends AbstractController
         ]);
     }
 
-    #[Route('/delete/difficulty/{id}', name: 'admin_difficulty_delete')]
+    #[Route('/delete/{id}', name: 'admin_difficulty_delete')]
     public function delete(DifficultyRepository $difficultyRepository, EntityManagerInterface $entityManager, int $id): Response
     {
         $difficulty = $difficultyRepository->find($id);

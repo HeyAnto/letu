@@ -11,7 +11,7 @@
 
 {% block main %}
 {% if app.user and recipe.author.id == app.user.id %}
-<section class="flex pt-15 gap-7">
+<section class="flex flex-wrap pt-15 gap-7">
   <a class="btn" href="{{ path('profile_recipe_edit', { id: recipe.id }) }}">Modifier la recette</a>
   <a class="btn btn-red delete-action" data-url="{{ path('profile_recipe_delete', { id: recipe.id }) }}">
     Supprimer la recette
@@ -85,9 +85,8 @@
     <span class="separation-line"></span>
   </div>
 
-  {# Un input avec un - pour réduire, à gauche le nombre de portions (ex: 4 personnes) au centre et à droite un + pour
-  augmenter le nombre
-  Influence la quantité des ingrédients #}
+  {# A FAIRE : À gauche un bouton - pour réduire le nombre de portions (ex: 4 personnes) au centre et à droite
+  un + pour augmenter le nombre ce qui influence la quantité des ingrédients #}
 
   <div class="ingredient-grid">
     {% for quantity in recipe.quantity %}
@@ -115,6 +114,21 @@
       </div>
     </div>
     {% endfor %}
+  </div>
+</section>
+
+<section class="flex flex-column gap-15">
+  <div class="flex flex-row items-center gap-4 pt-15">
+    <img class="icon" src="{{ asset('icons/icon-comment.svg') }}" alt="Icon Comment">
+    <h2>Commentaires</h2>
+    <span class="separation-line"></span>
+  </div>
+
+  <div class="flex flex-column gap-15">
+    {# Formulaire d'ajout de commentaire avec un textarea et un bouton #}
+    <div class="comment-card flex flex-column p-6 gap-6">
+
+    </div>
   </div>
 </section>
 

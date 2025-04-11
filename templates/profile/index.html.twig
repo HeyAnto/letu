@@ -7,7 +7,7 @@
     {% if app.user and app.user.id == user.id %}
     <div class="flex flex-column gap-7">
         <p class="p-min text-grey">Vous pouvez enrichir votre profil en le modifiant.</p>
-        <div class="flex gap-7">
+        <div class="flex flex-wrap gap-7">
             {% if is_granted('ROLE_ADMIN') %}
             <a class="btn" href="{{ path('admin_index') }}">Back-office</a>
             {% endif %}
